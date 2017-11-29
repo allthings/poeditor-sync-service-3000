@@ -1,0 +1,53 @@
+service: 
+  name: ${self:custom.package.name}
+  # awsKmsKeyArn: ${self:custom.package.config.awsKmsKeyArn} # use a custom kms key
+
+custom:
+  awsAccountId: ${self:custom.package.config.awsAccountId}
+  defaultStage: development
+  defaultEnvironment: development
+  package: ${file(./package.json)}
+  versioning:
+    default: false
+    production: true
+    prerelease: false
+    staging: false
+  xrayTracingMode: Active
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${env:STAGE, self:custom.defaultStage}
+  region: ${self:custom.package.config.awsRegion}
+  role: arn:aws:iam::${self:custom.awsAccountId}:role/aws-lambda-basic-execution-role
+  deploymentBucket: allthings-lambda-deployments-${self:provider.region}
+  versionFunctions: ${self:custom.versioning.${self:provider.stage}, self:custom.versioning.default} 
+  environment: 
+    STAGE: ${self:provider.stage}
+    NODE_ENV: ${env:NODE_ENV, self:custom.defaultEnvironment}
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+functions:
+  boilerplateHandler:
+    description: Boilerplate Handler
+    memorySize: 512
+    timeout: 30
+    handler: src/handler.default
+    events:
+      - http:
+          path: /
+          method: GET
+      - http:
+          path: /{route+}
+          method: GET
+
+resources:
+  Resources:
+    # Enable X-Ray tracing on Lambda functions
+    BoilerplateHandlerLambdaFunction:
+      Properties:
+        TracingConfig:
+          Mode: ${self:custom.xrayTracingMode}

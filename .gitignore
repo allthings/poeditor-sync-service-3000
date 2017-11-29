@@ -1,3 +1,10 @@
+# Project specific
+.DS_Store
+.build
+.serverless
+.vscode
+dist
+
 # Logs
 logs
 *.log
@@ -56,4 +63,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
