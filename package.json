@@ -13,7 +13,8 @@
   "scripts": {
     "build": "npm run clean && tsc -d",
     "clean": "rimraf dist",
-    "deploy": " yarn lint && yarn test && STAGE=staging scripts/deploy.sh",
+    "predeploy": "yarn lint && yarn test",
+    "deploy": "STAGE=staging scripts/deploy.sh",
     "dev": "scripts/dev.sh",
     "dev:offline": "serverless offline start",
     "encrypt-string": "scripts/kms-encrypt.sh",
