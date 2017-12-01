@@ -19,7 +19,7 @@ provider:
   runtime: nodejs6.10
   stage: ${env:STAGE, self:custom.defaultStage}
   region: ${self:custom.package.config.awsRegion}
-  role: arn:aws:iam::${self:custom.awsAccountId}:role/aws-lambda-basic-execution-role
+  role: arn:aws:iam::${self:custom.awsAccountId}:role/aws-lambda-localization-sync-role
   deploymentBucket: allthings-lambda-deployments-${self:provider.region}
   versionFunctions: ${self:custom.versioning.${self:provider.stage}, self:custom.versioning.default} 
   environment: 
