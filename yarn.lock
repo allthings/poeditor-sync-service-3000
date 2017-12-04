@@ -22,6 +22,12 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-1.1.0.tgz#93b1be91f63c184450385272c47b6496fd028e02"
 
+"@types/got@^7.1.5":
+  version "7.1.5"
+  resolved "https://registry.yarnpkg.com/@types/got/-/got-7.1.5.tgz#7cda8ddf88dcf11240f9069b79ed368ed4102393"
+  dependencies:
+    "@types/node" "*"
+
 "@types/graphql@0.10.2":
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.10.2.tgz#d7c79acbaa17453b6681c80c34b38fcb10c4c08c"
@@ -4656,6 +4662,10 @@ slash@^1.0.0:
 slice-ansi@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-0.0.4.tgz#edbf8903f66f7ce2f8eafd6ceed65e264c831b35"
+
+smid@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/smid/-/smid-0.1.1.tgz#5c6ffa401d1465de4066fbab0f2033237bec87bc"
 
 sntp@1.x.x:
   version "1.0.9"

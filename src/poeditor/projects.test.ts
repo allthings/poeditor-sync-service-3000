@@ -1,5 +1,5 @@
 // tslint:disable no-expression-statement
-import projects from './projects'
+import projects, { getProjectNameAndVariation } from './projects'
 
 const mockResult = {
   response: { code: '200', message: 'OK', status: 'success' },
@@ -40,7 +40,7 @@ const mockResult = {
 
 // Mock the http request
 jest.mock('got', () => ({
-  default: url => {
+  default: () => {
     return new Promise(resolve => resolve({ body: mockResult }))
   },
 }))
@@ -48,7 +48,36 @@ jest.mock('got', () => ({
 describe('The Poeditor Projects wrapper', () => {
   it('should return a response object', async () => {
     const result = await projects()
+    expect(result).toMatchSnapshot()
+  })
 
-    expect(result).toEqual(mockResult.result.projects)
+  it('should be able to parse name, variation, and default from POEditor project name', () => {
+    expect(getProjectNameAndVariation('')).toEqual({
+      isDefault: false,
+      name: undefined,
+      normative: undefined,
+      variation: undefined,
+    })
+
+    expect(getProjectNameAndVariation('App - Residential - Informal (default)')).toEqual({
+      isDefault: true,
+      name: 'app',
+      normative: 'informal',
+      variation: 'residential',
+    })
+
+    expect(getProjectNameAndVariation('App - Commercial - Formal')).toEqual({
+      isDefault: false,
+      name: 'app',
+      normative: 'formal',
+      variation: 'commercial',
+    })
+
+    expect(getProjectNameAndVariation('Cockpit')).toEqual({
+      isDefault: false,
+      name: 'cockpit',
+      normative: undefined,
+      variation: undefined,
+    })
   })
 })

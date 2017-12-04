@@ -1,4 +1,5 @@
-// tslint:disable no-expression-statement
+// tslint:disable no-expression-statement no-implicit-dependencies
+import { throws } from 'smid'
 import api from './api'
 
 // Mock the http request
@@ -17,6 +18,10 @@ jest.mock('got', () => ({
     ),
 }))
 
+beforeAll(() => {
+  process.env.POEDITOR_TOKEN = 'foobar' // tslint:disable-line no-object-mutation
+})
+
 describe('The Poeditor API wrapper', () => {
   it('should return a response object', async () => {
     const response = await api('200')
@@ -24,8 +29,17 @@ describe('The Poeditor API wrapper', () => {
     expect(response.result).toEqual({ foo: 'bar' })
   })
 
-  // @TODO: I cannot get this to work.
-  /*it('should throw when status code is not 200', async () => {
-    await expect(api('400')).rejects.toThrow()
-  })*/
+  it('should throw when status code is not 200', async () => {
+    const error = await throws(api('400'))
+
+    expect(error instanceof Error).toBe(true)
+    expect(error.message).toMatch('mock message for code 400')
+  })
+
+  it('should throw when POEDITOR_TOKEN environment variable is unset', async () => {
+    const error = await throws(api('200', {}, ''))
+
+    expect(error instanceof Error).toBe(true)
+    expect(error.message).toMatch('POEDITOR_TOKEN')
+  })
 })

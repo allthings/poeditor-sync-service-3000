@@ -25,6 +25,7 @@ provider:
   environment: 
     STAGE: ${self:provider.stage}
     NODE_ENV: ${env:NODE_ENV, self:custom.defaultEnvironment}
+    AWS_S3_BUCKET: allthings-static
 
 plugins:
   - serverless-webpack

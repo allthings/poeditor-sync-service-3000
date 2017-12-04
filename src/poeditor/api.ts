@@ -3,17 +3,21 @@ import kmsDecrypt from '../utils/kms'
 
 const POEDITOR_API_BASE_URL = 'https://api.poeditor.com/v2'
 
-export default async function poeditorApiRequest(method: string, data: any = {}): any {
-  const POEDITOR_TOKEN = await kmsDecrypt(process.env.POEDITOR_TOKEN || '')
+export default async function poeditorApiRequest(
+  method: string,
+  data: any = {},
+  POEDITOR_TOKEN: string | undefined = process.env.POEDITOR_TOKEN
+): Promise<any> {
+  const apiToken = await kmsDecrypt(POEDITOR_TOKEN || '')
 
-  if (!POEDITOR_TOKEN.length) {
-    // @TODO: ApiError()
+  if (!apiToken.length) {
+    // @TODO: use ApiError()
     throw new Error('POEDITOR_TOKEN environment variable is not set.')
   }
 
   try {
     const response = await get(`${POEDITOR_API_BASE_URL}/${method}`, {
-      body: { api_token: POEDITOR_TOKEN, ...data },
+      body: { api_token: apiToken, ...data },
       form: true,
       headers: {
         'user-agent': 'poets/1.0 (https://github.com/allthings/poeditor-sync-service-3000)',
@@ -28,7 +32,7 @@ export default async function poeditorApiRequest(method: string, data: any = {})
 
     return response.body
   } catch (error) {
-    // @TODO: change to ApiError
+    // @TODO: use ApiError
     throw error
   }
 }

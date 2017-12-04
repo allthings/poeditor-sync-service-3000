@@ -1,7 +1,8 @@
 {
   "name": "poeditor-sync-service-3000",
   "version": "1.0.0",
-  "description": "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
+  "description":
+    "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
   "main": "src/handler.js",
   "config": {
     "deployProfile": "allthings-deploy",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "0.0.22",
+    "@types/got": "7.1.5",
     "@types/jest": "21.1.8",
     "@types/node": "8.0.54",
     "@types/source-map-support": "0.4.0",
@@ -63,6 +65,7 @@
     "serverless": "1.24.1",
     "serverless-offline": "3.16.0",
     "serverless-webpack": "4.1.0",
+    "smid": "0.1.1",
     "ts-jest": "21.2.4",
     "ts-loader": "3.2.0",
     "tslint": "5.8.0",
@@ -80,15 +83,8 @@
     "useTabs": false
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "yarn prettier",
-      "yarn lint",
-      "git add"
-    ],
-    "*.{json}": [
-      "yarn prettier",
-      "git add"
-    ]
+    "*.{ts,tsx}": ["yarn prettier", "yarn lint", "git add"],
+    "*.{json}": ["yarn prettier", "git add"]
   },
   "jest": {
     "bail": true,
@@ -98,12 +94,7 @@
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js", "json"],
     "coverageThreshold": {
       "global": {
         "branches": 100,
