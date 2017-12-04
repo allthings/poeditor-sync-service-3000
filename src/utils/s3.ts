@@ -43,13 +43,16 @@ export async function put(
 }
 
 export async function remove(
-  keys: ReadonlyArray<any>,
+  oneOrMoreKeys: string | ReadonlyArray<string>,
   Bucket = process.env.AWS_S3_BUCKET || ''
 ): Promise<boolean> {
   const params: S3.Types.DeleteObjectsRequest = {
     Bucket,
     Delete: {
-      Objects: keys.map((Key: string) => ({ Key })),
+      Objects:
+        typeof oneOrMoreKeys === 'string'
+          ? [{ Key: oneOrMoreKeys }]
+          : oneOrMoreKeys.map((Key: string) => ({ Key })),
     },
   }
 

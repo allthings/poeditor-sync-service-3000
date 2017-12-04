@@ -24,6 +24,7 @@ provider:
   versionFunctions: ${self:custom.versioning.${self:provider.stage}, self:custom.versioning.default} 
   environment: 
     STAGE: ${self:provider.stage}
+    VALID_STAGES: staging, prerelease, production
     NODE_ENV: ${env:NODE_ENV, self:custom.defaultEnvironment}
     AWS_S3_BUCKET: allthings-static
 

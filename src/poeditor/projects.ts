@@ -29,7 +29,9 @@ export function getProjectNameAndVariation(
   }
 }
 
-export default async function listProjects(nameFilter: string): Promise<InterfaceProject> {
+export default async function listProjects(
+  nameFilter?: string
+): Promise<ReadonlyArray<InterfaceProject>> {
   const response = await api('projects/list')
 
   const projects =

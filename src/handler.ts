@@ -1,12 +1,17 @@
 import * as handler from 'alagarr'
-// @TODO: aws-xray-sdk-core sucks. it's full of bloat.
 import * as AwsXray from 'aws-xray-sdk-core'
 import 'source-map-support/register'
+import getProjectLanguageCodes from './poeditor/languages'
 import getPoeditorProjects from './poeditor/projects'
-import { exists as s3ObjectExists, put as s3PutObject } from './utils/s3'
+import getPoeditorProjectLanguageTerms from './poeditor/terms'
+import { exists as s3ObjectExists, put as s3PutObject, remove as s3RemoveObject } from './utils/s3'
 
-const { STAGE = 'development', CDN_HOST_URL = '' } = process.env
+const { STAGE = 'development' } = process.env
 const IS_PRODUCTION = STAGE !== 'development'
+
+const VALID_STAGES: ReadonlyArray<string> = (process.env.VALID_STAGES || '')
+  .replace(' ', '')
+  .split(',')
 
 const handlerConfig = {
   cspPolicies: {
@@ -30,24 +35,13 @@ if (IS_PRODUCTION) {
   // tslint:enable
 }
 
-/*
-  4. 
-  4. 
-  5. 
-  5.1 
-  6. 
-*/
 export default handler(async (request: any, response: any) => {
   const { path } = request
 
   /*
     1. from request path, figure out which app & stage we should process.
   */
-  const [, name, stage = ''] = path.match(/^\/([^/]+)\/*([^/]*)/) || [
-    undefined,
-    undefined,
-    undefined,
-  ]
+  const [, name, stage] = path.match(/^\/([^/]+)\/*([^/]*)/) || [undefined, undefined, undefined]
 
   // Check that project name was included in request path
   if (!name) {
@@ -55,12 +49,25 @@ export default handler(async (request: any, response: any) => {
     return response.json({ error: `Project name missing from request URL ${path}` }, 400)
   }
 
+  // Check that the stage is one of our valid stages
+  if (stage && !VALID_STAGES.includes(stage)) {
+    // @TODO: just throw ClientError
+    return response.json(
+      {
+        error: `${stage} is not a valid stage. Possible values are: "${VALID_STAGES.join(
+          ', "'
+        )}" or blank (all)`,
+      },
+      400
+    )
+  }
+
   /*
     2. Check if another synchronisation process is already running.
     Cheap lock implemented as an object in S3. In case of a crash,
     the S3 object will automatically expire after 300 seconds (5 minutes).
   */
-  const lockObjectKey = `.locks/${name}${stage ? `-${stage}` : ''}`
+  const lockObjectKey = `${name}/translation-sync.lock`
 
   if (await s3ObjectExists(lockObjectKey)) {
     // @TODO: just throw ClientError
@@ -70,7 +77,13 @@ export default handler(async (request: any, response: any) => {
     )
   } else {
     // No lock exists. Create one!
-    if (!await s3PutObject(lockObjectKey, 'locked', { Expires: Date.now() + 300 })) {
+    const lockData = {
+      date: Date.now(),
+      name,
+      stage,
+    }
+
+    if (!await s3PutObject(lockObjectKey, lockData, { Expires: lockData.date + 300 })) {
       // @TODO: just throw ClientError
       return response.json(
         { error: `Unable to gain a lock on synchronisation process for "${name}".` },
@@ -80,29 +93,59 @@ export default handler(async (request: any, response: any) => {
   }
 
   /*
-    3. Get POEditor projects which match app name from step #1
+    3. Get POEditor projects which match application name from step #1
   */
   const projects = await getPoeditorProjects(name)
 
   /*
-    4. figure out each variation for each project (residential, commercial, formal, informal)
+    4. Get list of translation language codes for each project-variation
   */
+  const listOfEachProjectsLanguageCodes = await Promise.all(
+    projects.map(({ id }) => getProjectLanguageCodes(id))
+  )
 
   /*
-    5. get all locales for each matched project-variations
+    5. Get all translations for each language, for each project-variations
   */
+  const termsForEachProjectLanguage = await Promise.all(
+    projects.map((project, projectIndex) =>
+      Promise.all(
+        listOfEachProjectsLanguageCodes[projectIndex].map(languageCode =>
+          getPoeditorProjectLanguageTerms(project.id, languageCode)
+        )
+      )
+    )
+  )
 
   /*
-    6. get all translations for each locale for each project-variations
+    6. Merge project defaults with variation (check for empty strings, too)
   */
+  const { translations, missing } = resolveTranslationTermsGivenDefaults()
 
   /*
-    7. merge project defaults with variation (check for empty strings, too)
+    7. Save dat shiiiit to s3.
   */
+  Promise.all(
+    projects.map(project =>
+      s3PutObject(
+        `${name}/${stage}/${languageCode}-${variation}-${normative}.json`,
+        translationPayload
+      )
+    )
+  )
 
   /*
-    8. save dat shiiiit to s3.
+    8. Delete the cheap-lock
   */
+  await s3RemoveObject(lockObjectKey)
 
-  return response.json({ message: 'Hi.', path, projects })
+  /*
+    We're done!
+  */
+  return response.json({
+    message: 'Hi.',
+    missing: [...missing, 'list of terms missing translations'],
+    path,
+    projects,
+  })
 }, handlerConfig)

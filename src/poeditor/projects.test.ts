@@ -39,11 +39,7 @@ const mockResult = {
 }
 
 // Mock the http request
-jest.mock('got', () => ({
-  default: () => {
-    return new Promise(resolve => resolve({ body: mockResult }))
-  },
-}))
+jest.mock('got', () => () => new Promise(resolve => resolve({ body: mockResult })))
 
 describe('The Poeditor Projects wrapper', () => {
   it('should return a response object', async () => {

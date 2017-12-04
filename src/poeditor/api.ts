@@ -1,4 +1,4 @@
-import get from 'got'
+import * as get from 'got'
 import kmsDecrypt from '../utils/kms'
 
 const POEDITOR_API_BASE_URL = 'https://api.poeditor.com/v2'
