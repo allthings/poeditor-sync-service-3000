@@ -1,8 +1,7 @@
 {
   "name": "poeditor-sync-service-3000",
   "version": "1.0.0",
-  "description":
-    "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
+  "description": "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
   "main": "src/handler.js",
   "config": {
     "deployProfile": "allthings-deploy",
@@ -42,35 +41,35 @@
   "homepage": "https://github.com/allthings/serverless-boilerplates/blob/master/typescript",
   "dependencies": {
     "alagarr": "1.0.0-1",
-    "aws-sdk": "2.158.0",
+    "aws-sdk": "2.162.0",
     "aws-xray-sdk-core": "1.1.6",
-    "got": "^8.0.0",
+    "got": "8.0.1",
     "source-map-support": "0.5.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "0.0.21",
+    "@types/aws-lambda": "0.0.22",
     "@types/jest": "21.1.8",
-    "@types/node": "8.0.53",
+    "@types/node": "8.0.54",
     "@types/source-map-support": "0.4.0",
     "fork-ts-checker-webpack-plugin": "0.2.9",
     "happypack": "4.0.0",
     "husky": "0.14.3",
     "jest": "21.2.1",
     "json-loader": "0.5.7",
-    "lint-staged": "5.0.0",
+    "lint-staged": "6.0.0",
     "nsp": "3.1.0",
     "prettier": "1.8.2",
     "rimraf": "2.6.2",
     "serverless": "1.24.1",
     "serverless-offline": "3.16.0",
     "serverless-webpack": "4.1.0",
-    "ts-jest": "21.2.3",
-    "ts-loader": "3.1.1",
+    "ts-jest": "21.2.4",
+    "ts-loader": "3.2.0",
     "tslint": "5.8.0",
     "tslint-config-prettier": "1.6.0",
     "tslint-immutable": "4.4.0",
     "typescript": "2.6.2",
-    "webpack": "3.8.1"
+    "webpack": "3.9.1"
   },
   "prettier": {
     "eslintIntegration": false,
@@ -81,8 +80,15 @@
     "useTabs": false
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["yarn prettier", "yarn lint", "git add"],
-    "*.{json}": ["yarn prettier", "git add"]
+    "*.{ts,tsx}": [
+      "yarn prettier",
+      "yarn lint",
+      "git add"
+    ],
+    "*.{json}": [
+      "yarn prettier",
+      "git add"
+    ]
   },
   "jest": {
     "bail": true,
@@ -92,6 +98,19 @@
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "json"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
