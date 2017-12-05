@@ -1,5 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`The Poeditor Projects wrapper should let me filter by project name 1`] = `
+Array [
+  Object {
+    "id": 73515,
+    "isDefault": true,
+    "name": "app",
+    "normative": "informal",
+    "variation": "residential",
+  },
+  Object {
+    "id": 136001,
+    "isDefault": false,
+    "name": "app",
+    "normative": "formal",
+    "variation": "commercial",
+  },
+  Object {
+    "id": 136003,
+    "isDefault": false,
+    "name": "app",
+    "normative": "informal",
+    "variation": "commercial",
+  },
+  Object {
+    "id": 136005,
+    "isDefault": false,
+    "name": "app",
+    "normative": "formal",
+    "variation": "residential",
+  },
+]
+`;
+
+exports[`The Poeditor Projects wrapper should let me filter by project name, variation, and normative 1`] = `
+Array [
+  Object {
+    "id": 136005,
+    "isDefault": false,
+    "name": "app",
+    "normative": "formal",
+    "variation": "residential",
+  },
+]
+`;
+
+exports[`The Poeditor Projects wrapper should let me filter by project normative 1`] = `
+Array [
+  Object {
+    "id": 136001,
+    "isDefault": false,
+    "name": "app",
+    "normative": "formal",
+    "variation": "commercial",
+  },
+  Object {
+    "id": 136005,
+    "isDefault": false,
+    "name": "app",
+    "normative": "formal",
+    "variation": "residential",
+  },
+]
+`;
+
+exports[`The Poeditor Projects wrapper should let me filter by project variation 1`] = `
+Array [
+  Object {
+    "id": 73515,
+    "isDefault": true,
+    "name": "app",
+    "normative": "informal",
+    "variation": "residential",
+  },
+  Object {
+    "id": 136005,
+    "isDefault": false,
+    "name": "app",
+    "normative": "formal",
+    "variation": "residential",
+  },
+]
+`;
+
 exports[`The Poeditor Projects wrapper should return a response object 1`] = `
 Array [
   Object {

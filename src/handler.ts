@@ -9,10 +9,6 @@ import { exists as s3ObjectExists, put as s3PutObject, remove as s3RemoveObject 
 const { STAGE = 'development' } = process.env
 const IS_PRODUCTION = STAGE !== 'development'
 
-const VALID_STAGES: ReadonlyArray<string> = (process.env.VALID_STAGES || '')
-  .replace(' ', '')
-  .split(',')
-
 const handlerConfig = {
   cspPolicies: {
     'default-src': "'self'",
@@ -41,25 +37,17 @@ export default handler(async (request: any, response: any) => {
   /*
     1. from request path, figure out which app & stage we should process.
   */
-  const [, name, stage] = path.match(/^\/([^/]+)\/*([^/]*)/) || [undefined, undefined, undefined]
+  const [, name, variation, normative] = path.match(/^\/([^/]+)\/*([^/]*)\/*([^/]*)/) || [
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+  ]
 
   // Check that project name was included in request path
   if (!name) {
     // @TODO: just throw ClientError
     return response.json({ error: `Project name missing from request URL ${path}` }, 400)
-  }
-
-  // Check that the stage is one of our valid stages
-  if (stage && !VALID_STAGES.includes(stage)) {
-    // @TODO: just throw ClientError
-    return response.json(
-      {
-        error: `${stage} is not a valid stage. Possible values are: "${VALID_STAGES.join(
-          ', "'
-        )}" or blank (all)`,
-      },
-      400
-    )
   }
 
   /*
@@ -80,10 +68,12 @@ export default handler(async (request: any, response: any) => {
     const lockData = {
       date: Date.now(),
       name,
-      stage,
+      variation,
     }
 
-    if (!await s3PutObject(lockObjectKey, lockData, { Expires: lockData.date + 300 })) {
+    if (
+      !await s3PutObject(lockObjectKey, JSON.stringify(lockData), { Expires: lockData.date + 300 })
+    ) {
       // @TODO: just throw ClientError
       return response.json(
         { error: `Unable to gain a lock on synchronisation process for "${name}".` },
@@ -95,7 +85,18 @@ export default handler(async (request: any, response: any) => {
   /*
     3. Get POEditor projects which match application name from step #1
   */
-  const projects = await getPoeditorProjects(name)
+  const projects = await getPoeditorProjects({ name, variation, normative })
+
+  // Check that the variation exists
+  if (Object.keys(projects).length === 0) {
+    // @TODO: just throw ClientError
+    return response.json(
+      {
+        error: `There is no POEditor project matching ${path}`,
+      },
+      400
+    )
+  }
 
   /*
     4. Get list of translation language codes for each project-variation
@@ -117,14 +118,16 @@ export default handler(async (request: any, response: any) => {
     )
   )
 
+  console.log('we have reached this point', termsForEachProjectLanguage)
   /*
     6. Merge project defaults with variation (check for empty strings, too)
   */
-  const { translations, missing } = resolveTranslationTermsGivenDefaults()
+  //const { translations, missing } = resolveTranslationTermsGivenDefaults()
 
   /*
     7. Save dat shiiiit to s3.
   */
+  /*
   Promise.all(
     projects.map(project =>
       s3PutObject(
@@ -132,7 +135,7 @@ export default handler(async (request: any, response: any) => {
         translationPayload
       )
     )
-  )
+  )*/
 
   /*
     8. Delete the cheap-lock
@@ -144,7 +147,7 @@ export default handler(async (request: any, response: any) => {
   */
   return response.json({
     message: 'Hi.',
-    missing: [...missing, 'list of terms missing translations'],
+    missing: [/*...missing*/ 'list of terms missing translations'],
     path,
     projects,
   })

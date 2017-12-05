@@ -1,49 +1,33 @@
 // tslint:disable no-expression-statement
 import projects, { getProjectNameAndVariation } from './projects'
 
-const mockResult = {
-  response: { code: '200', message: 'OK', status: 'success' },
-  result: {
-    projects: [
-      {
-        created: '2016-09-15T13:05:59+0000',
-        id: 73515,
-        name: 'App - Residential - Informal (default)',
-        open: 0,
-        public: 0,
-      },
-      { created: '2016-12-12T13:52:44+0000', id: 86419, name: 'Cockpit', open: 0, public: 0 },
-      {
-        created: '2017-10-05T13:48:30+0000',
-        id: 136001,
-        name: 'App - Commercial - Formal',
-        open: 0,
-        public: 0,
-      },
-      {
-        created: '2017-10-05T13:56:18+0000',
-        id: 136003,
-        name: 'App - Commercial - Informal',
-        open: 0,
-        public: 0,
-      },
-      {
-        created: '2017-10-05T13:56:31+0000',
-        id: 136005,
-        name: 'App - Residential - Formal',
-        open: 0,
-        public: 0,
-      },
-    ],
-  },
-}
-
-// Mock the http request
-jest.mock('got', () => () => new Promise(resolve => resolve({ body: mockResult })))
-
 describe('The Poeditor Projects wrapper', () => {
   it('should return a response object', async () => {
     const result = await projects()
+    expect(result).toMatchSnapshot()
+  })
+
+  it('should let me filter by project name', async () => {
+    const result = await projects({ name: 'app' })
+    expect(result.length).toBe(4)
+    expect(result).toMatchSnapshot()
+  })
+
+  it('should let me filter by project variation', async () => {
+    const result = await projects({ variation: 'residential' })
+    expect(result.length).toBe(2)
+    expect(result).toMatchSnapshot()
+  })
+
+  it('should let me filter by project normative', async () => {
+    const result = await projects({ normative: 'formal' })
+    expect(result.length).toBe(2)
+    expect(result).toMatchSnapshot()
+  })
+
+  it('should let me filter by project name, variation, and normative', async () => {
+    const result = await projects({ name: 'app', variation: 'residential', normative: 'formal' })
+    expect(result.length).toBe(1)
     expect(result).toMatchSnapshot()
   })
 

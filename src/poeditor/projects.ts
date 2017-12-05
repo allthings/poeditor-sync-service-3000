@@ -8,6 +8,12 @@ export interface InterfaceProject {
   readonly normative: string | undefined
 }
 
+export interface InterfaceProjectFilter {
+  readonly name?: string
+  readonly variation?: string
+  readonly normative?: string
+}
+
 export function getProjectNameAndVariation(
   projectName: string
 ): {
@@ -30,7 +36,7 @@ export function getProjectNameAndVariation(
 }
 
 export default async function listProjects(
-  nameFilter?: string
+  filters?: InterfaceProjectFilter
 ): Promise<ReadonlyArray<InterfaceProject>> {
   const response = await api('projects/list')
 
@@ -41,8 +47,14 @@ export default async function listProjects(
       ...getProjectNameAndVariation(name),
     }))
 
-  if (nameFilter) {
-    return projects.filter(({ name }: InterfaceProject) => name === nameFilter)
+  if (filters) {
+    return projects.filter((project: InterfaceProject) =>
+      Object.keys(filters).reduce(
+        (include: boolean, filter: keyof InterfaceProjectFilter) =>
+          include && filters[filter] === project[filter],
+        true
+      )
+    )
   }
 
   return projects

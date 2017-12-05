@@ -24,7 +24,6 @@ provider:
   versionFunctions: ${self:custom.versioning.${self:provider.stage}, self:custom.versioning.default} 
   environment: 
     STAGE: ${self:provider.stage}
-    VALID_STAGES: staging, prerelease, production
     NODE_ENV: ${env:NODE_ENV, self:custom.defaultEnvironment}
     AWS_S3_BUCKET: allthings-static
 
@@ -33,8 +32,8 @@ plugins:
   - serverless-offline
 
 functions:
-  boilerplateHandler:
-    description: Boilerplate Handler
+  poets:
+    description: POEditor translation synchronisation service
     memorySize: 512
     timeout: 30
     handler: src/handler.default
@@ -49,7 +48,7 @@ functions:
 resources:
   Resources:
     # Enable X-Ray tracing on Lambda functions
-    BoilerplateHandlerLambdaFunction:
+    PoetsLambdaFunction:
       Properties:
         TracingConfig:
           Mode: ${self:custom.xrayTracingMode}

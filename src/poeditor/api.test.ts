@@ -3,20 +3,19 @@ import { throws } from 'smid'
 import api from './api'
 
 // Mock the http request
-jest.mock('got', () => ({
-  default: apiMethodOrMockCode =>
-    new Promise(resolve =>
-      resolve({
-        body: {
-          response: {
-            code: apiMethodOrMockCode.substr(-3),
-            message: `mock message for code ${apiMethodOrMockCode.substr(-3)}`,
-          },
-          result: { foo: 'bar' },
+jest.mock('got', () => (apiMethodOrMockCode: string) =>
+  new Promise(resolve =>
+    resolve({
+      body: {
+        response: {
+          code: apiMethodOrMockCode.substr(-3),
+          message: `mock message for code ${apiMethodOrMockCode.substr(-3)}`,
         },
-      })
-    ),
-}))
+        result: { foo: 'bar' },
+      },
+    })
+  )
+)
 
 beforeAll(() => {
   process.env.POEDITOR_TOKEN = 'foobar' // tslint:disable-line no-object-mutation
