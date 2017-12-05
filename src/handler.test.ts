@@ -35,7 +35,7 @@ describe('The handler', () => {
   it('should return an API Gateway-compatible object', async () => {
     const result = await handlerPromise(mockRequest)
 
-    expect(result.statusCode).toBeTruthy()
+    expect(result.statusCode).toBe(200)
 
     expect(result.body).toBeTruthy()
     expect(typeof result.body).toBe('string')
@@ -70,5 +70,12 @@ describe('The handler', () => {
 
     expect(result.statusCode).toBe(400)
     expect(result.body).toMatch('no POEditor project matching')
+  })
+
+  it('should work with X-ray enabled', async () => {
+    process.env.STAGE = 'test' // tslint:disable-line no-object-mutation
+    const result = await handlerPromise(mockRequest)
+
+    expect(result.statusCode).toBe(200)
   })
 })

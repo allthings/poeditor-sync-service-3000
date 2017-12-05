@@ -3,7 +3,7 @@ import api from './api'
 export interface InterfaceProject {
   readonly id: number
   readonly isDefault: boolean
-  readonly name: string | undefined
+  readonly name: string
   readonly variation: string | undefined
   readonly normative: string | undefined
 }

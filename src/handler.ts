@@ -4,6 +4,7 @@ import 'source-map-support/register'
 import getProjectLanguageCodes from './poeditor/languages'
 import getPoeditorProjects from './poeditor/projects'
 import getPoeditorProjectLanguageTerms from './poeditor/terms'
+import resolveTranslationsGivenTermsAndDefaults from './translations'
 import { exists as s3ObjectExists, put as s3PutObject, remove as s3RemoveObject } from './utils/s3'
 
 const { STAGE = 'development' } = process.env
@@ -118,11 +119,15 @@ export default handler(async (request: any, response: any) => {
     )
   )
 
-  console.log('we have reached this point', termsForEachProjectLanguage)
+  console.log('we have reached this point', projects, termsForEachProjectLanguage)
   /*
     6. Merge project defaults with variation (check for empty strings, too)
   */
-  //const { translations, missing } = resolveTranslationTermsGivenDefaults()
+  const { translations, missing } = resolveTranslationsGivenTermsAndDefaults(
+    projects,
+    listOfEachProjectsLanguageCodes,
+    termsForEachProjectLanguage
+  )
 
   /*
     7. Save dat shiiiit to s3.

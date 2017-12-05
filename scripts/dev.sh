@@ -14,7 +14,6 @@ export AWS_REGION=local
 export AWS_ACCESS_KEY_ID=foobar-key
 export AWS_SECRET_ACCESS_KEY=foobar-secret
 export STAGE="development"
-export DISABLE_KMS_DECRYPTION="true"
 
 cleanup() {
   kill "$SERVE"

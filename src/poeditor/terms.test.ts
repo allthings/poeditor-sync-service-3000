@@ -6,6 +6,7 @@ describe('The Poeditor Terms wrapper', () => {
     expect(await listProjectLanguageTerms(1234, 'de')).toEqual({
       'contracts.unit-type.caretaker-room': 'Hauswartraum',
       'contracts.unit-type.carport': 'Einstellplatz',
+      'test.missing.translation': '',
     })
   })
 })

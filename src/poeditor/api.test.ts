@@ -17,10 +17,6 @@ jest.mock('got', () => (apiMethodOrMockCode: string) =>
   )
 )
 
-beforeAll(() => {
-  process.env.POEDITOR_TOKEN = 'foobar' // tslint:disable-line no-object-mutation
-})
-
 describe('The Poeditor API wrapper', () => {
   it('should return a response object', async () => {
     const response = await api('200')
