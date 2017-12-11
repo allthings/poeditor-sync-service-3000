@@ -32,7 +32,10 @@ export async function put(
   Bucket = process.env.AWS_S3_BUCKET || ''
 ): Promise<boolean> {
   const params: S3.Types.PutObjectRequest = {
-    Body,
+    Body:
+      Body instanceof Object && Body.constructor === Object
+        ? JSON.stringify(Body)
+        : Body,
     Bucket,
     Key,
     ...options,

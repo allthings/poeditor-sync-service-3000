@@ -5,7 +5,11 @@ import getProjectLanguageCodes from './poeditor/languages'
 import getPoeditorProjects from './poeditor/projects'
 import getPoeditorProjectLanguageTerms from './poeditor/terms'
 import resolveTranslationsGivenTermsAndDefaults from './translations'
-import { exists as s3ObjectExists, put as s3PutObject, remove as s3RemoveObject } from './utils/s3'
+import {
+  exists as s3ObjectExists,
+  put as s3PutObject,
+  remove as s3RemoveObject,
+} from './utils/s3'
 
 const { STAGE = 'development' } = process.env
 const IS_PRODUCTION = STAGE !== 'development'
@@ -38,17 +42,17 @@ export default handler(async (request: any, response: any) => {
   /*
     1. from request path, figure out which app & stage we should process.
   */
-  const [, name, variation, normative] = path.match(/^\/([^/]+)\/*([^/]*)\/*([^/]*)/) || [
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-  ]
+  const [, name, variation, normative] = path.match(
+    /^\/([^/]+)\/*([^/]*)\/*([^/]*)/
+  ) || [undefined, undefined, undefined, undefined]
 
   // Check that project name was included in request path
   if (!name) {
     // @TODO: just throw ClientError
-    return response.json({ error: `Project name missing from request URL ${path}` }, 400)
+    return response.json(
+      { error: `Project name missing from request URL ${path}` },
+      400
+    )
   }
 
   /*
@@ -73,11 +77,17 @@ export default handler(async (request: any, response: any) => {
     }
 
     if (
-      !await s3PutObject(lockObjectKey, JSON.stringify(lockData), { Expires: lockData.date + 300 })
+      !await s3PutObject(lockObjectKey, lockData, {
+        Expires: lockData.date + 300,
+      })
     ) {
       // @TODO: just throw ClientError
       return response.json(
-        { error: `Unable to gain a lock on synchronisation process for "${name}".` },
+        {
+          error: `Unable to gain a lock on synchronisation process for "${
+            name
+          }".`,
+        },
         400
       )
     }
@@ -119,7 +129,11 @@ export default handler(async (request: any, response: any) => {
     )
   )
 
-  console.log('we have reached this point', projects, termsForEachProjectLanguage)
+  console.log(
+    'we have reached this point',
+    projects,
+    termsForEachProjectLanguage
+  )
   /*
     6. Merge project defaults with variation (check for empty strings, too)
   */
@@ -129,6 +143,7 @@ export default handler(async (request: any, response: any) => {
     termsForEachProjectLanguage
   )
 
+  console.log('handler translations', translations, missing)
   /*
     7. Save dat shiiiit to s3.
   */
@@ -152,7 +167,7 @@ export default handler(async (request: any, response: any) => {
   */
   return response.json({
     message: 'Hi.',
-    missing: [/*...missing*/ 'list of terms missing translations'],
+    missing,
     path,
     projects,
   })

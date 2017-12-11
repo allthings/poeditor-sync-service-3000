@@ -105,6 +105,10 @@
         "lines": 100,
         "statements": 100
       }
-    }
+    },
+    "coveragePathIgnorePatterns":[
+      "/node_modules/",
+      "/src/test/"
+    ]
   }
 }

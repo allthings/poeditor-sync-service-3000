@@ -26,6 +26,7 @@ provider:
     STAGE: ${self:provider.stage}
     NODE_ENV: ${env:NODE_ENV, self:custom.defaultEnvironment}
     AWS_S3_BUCKET: allthings-static
+    SOURCE_LANGUAGE: en # this is the default language which original/source strings are written in
 
 plugins:
   - serverless-webpack
