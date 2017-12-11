@@ -20,7 +20,8 @@ export default async function poeditorApiRequest(
       body: { api_token: apiToken, ...data },
       form: true,
       headers: {
-        'user-agent': 'poets/1.0 (https://github.com/allthings/poeditor-sync-service-3000)',
+        'user-agent':
+          'poets/1.0 (https://github.com/allthings/poeditor-sync-service-3000)',
       },
       json: true,
       method: 'POST',

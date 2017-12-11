@@ -2,7 +2,10 @@ import { S3 } from 'aws-sdk'
 
 const s3 = new S3()
 
-export function head(Key: string, Bucket = process.env.AWS_S3_BUCKET || ''): Promise<any> {
+export function head(
+  Key: string,
+  Bucket = process.env.AWS_S3_BUCKET || ''
+): Promise<any> {
   const params: S3.Types.HeadObjectRequest = {
     Bucket,
     Key,

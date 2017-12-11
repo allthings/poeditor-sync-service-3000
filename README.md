@@ -1,7 +1,8 @@
 # poeditor-sync-service-3000
 
 AWS Lambda/API Gateway service to sync project translations from the
-[POEditor](https://poeditor.com/) [API](https://poeditor.com/docs/api) and stick them into AWS S3.
+[POEditor](https://poeditor.com/) [API](https://poeditor.com/docs/api) and stick
+them into AWS S3.
 
 # Contents
 
@@ -22,8 +23,9 @@ yarn install
 
 ## Local Development
 
-Best practice is to develop locally using a TDD approach. The boilerplate includes sample tests on
-which you can build, including example of how to mock AWS services.
+Best practice is to develop locally using a TDD approach. The boilerplate
+includes sample tests on which you can build, including example of how to mock
+AWS services.
 
 Start the development environment with:
 
@@ -56,13 +58,15 @@ yarn watch:test
 
 ## Encrypting Secrets
 
-In production, encrypt sensitive environment variables or other secret strings with KMS:
+In production, encrypt sensitive environment variables or other secret strings
+with KMS:
 
 ```sh
 yarn encrypt-string "super secret string"
 ```
 
-To deploy secrets as part of an environment variable, add it to `serverless.yml` like so:
+To deploy secrets as part of an environment variable, add it to `serverless.yml`
+like so:
 
 ```yaml
 service:

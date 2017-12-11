@@ -30,8 +30,10 @@ export function getProjectNameAndVariation(
   return {
     isDefault: !!isDefault,
     name: typeof name === 'string' && name.length ? name : undefined,
-    normative: typeof normative === 'string' && normative.length ? normative : undefined,
-    variation: typeof variation === 'string' && variation.length ? variation : undefined,
+    normative:
+      typeof normative === 'string' && normative.length ? normative : undefined,
+    variation:
+      typeof variation === 'string' && variation.length ? variation : undefined,
   }
 }
 

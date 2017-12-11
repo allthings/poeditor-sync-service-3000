@@ -4,7 +4,10 @@ export default async function listProjectLanguageTerms(
   projectId: number,
   languageCode: string
 ): Promise<any> {
-  const response = await api('terms/list', { id: projectId, language: languageCode })
+  const response = await api('terms/list', {
+    id: projectId,
+    language: languageCode,
+  })
 
   return (
     response.result &&
@@ -14,7 +17,10 @@ export default async function listProjectLanguageTerms(
         {
           term,
           translation: { content },
-        }: { readonly term: string; readonly translation: { readonly content: string } }
+        }: {
+          readonly term: string
+          readonly translation: { readonly content: string }
+        }
       ) => ({ ...terms, [term]: content }),
       {}
     )

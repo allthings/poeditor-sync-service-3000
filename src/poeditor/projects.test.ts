@@ -26,7 +26,11 @@ describe('The Poeditor Projects wrapper', () => {
   })
 
   it('should let me filter by project name, variation, and normative', async () => {
-    const result = await projects({ name: 'app', variation: 'residential', normative: 'formal' })
+    const result = await projects({
+      name: 'app',
+      normative: 'formal',
+      variation: 'residential',
+    })
     expect(result.length).toBe(1)
     expect(result).toMatchSnapshot()
   })
@@ -39,7 +43,9 @@ describe('The Poeditor Projects wrapper', () => {
       variation: undefined,
     })
 
-    expect(getProjectNameAndVariation('App - Residential - Informal (default)')).toEqual({
+    expect(
+      getProjectNameAndVariation('App - Residential - Informal (default)')
+    ).toEqual({
       isDefault: true,
       name: 'app',
       normative: 'informal',

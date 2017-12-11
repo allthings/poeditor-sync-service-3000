@@ -12,5 +12,8 @@ MOCK_AWS.mock('S3', 'deleteObjects', (params: any, callback: any) =>
 )
 
 MOCK_AWS.mock('KMS', 'decrypt', (params: any, callback: any) =>
-  callback(null, params && params.CiphertextBlob && params.CiphertextBlob.toString())
+  callback(
+    null,
+    params && params.CiphertextBlob && params.CiphertextBlob.toString()
+  )
 )
