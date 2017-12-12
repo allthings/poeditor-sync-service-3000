@@ -131,4 +131,31 @@ describe('The translations', () => {
     expect(missing[0].de.length).toBe(1)
     expect(missing[0].fr.length).toBe(1)
   })
+
+  it('should be able to handle shitty data', async () => {
+    const { translations, missing } = resolveTranslationsGivenTermsAndDefaults(
+      [
+        {
+          id: 1,
+          isDefault: false,
+          name: 'app',
+          normative: 'informal',
+          variation: 'residential',
+        },
+        {
+          id: 2,
+          isDefault: false,
+          name: 'app',
+          normative: 'formal',
+          variation: 'residential',
+        },
+      ],
+      [['en', '', 'fr'], ['en']],
+      [[], [{ 'foo.bar': '' }]]
+    )
+
+    expect(translations.length).toBe(2)
+    expect(translations[0].length).toBe(0)
+    expect(missing.length).toBe(1)
+  })
 })

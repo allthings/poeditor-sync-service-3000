@@ -2,6 +2,11 @@ import { InterfaceProject } from './poeditor/projects'
 
 const SOURCE_LANGUAGE = process.env.SOURCE_LANGUAGE || 'en'
 
+// We need to use a symbol for a terms object key because we don't know what
+// name a term may have. E.g. a term may also be called 'missing' which would
+// conflict with our internal 'missing' key
+const MISSING_TERMS_SYMBOL = Symbol('term missing')
+
 export interface InterfaceResolvedTranslations {
   readonly translations: ReadonlyArray<any>
   readonly missing: ReadonlyArray<any>
@@ -38,18 +43,20 @@ export default function resolveTranslationsGivenTermsAndDefaults(
         ) => {
           const thisLanguageCode = languageCodes[projectIndex][languageIndex]
           const {
-            __missing: reducedTermsMissing,
-            ...reducedTerms,
+            missingTerms: reducedTermsMissing,
+            processedTerms: reducedTerms,
           } = Object.keys(languageTerms).reduce(
-            ({ __missing: missingTerms, ...translatedTerms }: any, term) => {
+            ({ missingTerms, processedTerms }: any, term) => {
               const termTranslation = languageTerms[term]
 
               // the term's translation is OK (non-empty)
               if (termTranslation.length) {
                 return {
-                  ...translatedTerms,
-                  [term]: termTranslation,
-                  __missing: missingTerms,
+                  missingTerms,
+                  processedTerms: {
+                    ...processedTerms,
+                    [term]: termTranslation,
+                  },
                 }
               }
 
@@ -66,9 +73,11 @@ export default function resolveTranslationsGivenTermsAndDefaults(
 
                 if (defaultTermTranslation.length) {
                   return {
-                    ...translatedTerms,
-                    [term]: defaultTermTranslation,
-                    __missing: [...missingTerms, term],
+                    missingTerms: [...missingTerms, term],
+                    processedTerms: {
+                      ...processedTerms,
+                      [term]: defaultTermTranslation,
+                    },
                   }
                 }
               }
@@ -84,20 +93,24 @@ export default function resolveTranslationsGivenTermsAndDefaults(
 
               if (fallbackTermTranslation.length) {
                 return {
-                  ...translatedTerms,
-                  [term]: fallbackTermTranslation,
-                  __missing: [...missingTerms, term],
+                  missingTerms: [...missingTerms, term],
+                  processedTerms: {
+                    ...processedTerms,
+                    [term]: fallbackTermTranslation,
+                  },
                 }
               }
 
               // screwed. there are no translations for this term.
               return {
-                ...translatedTerms,
-                [term]: '',
-                __missing: [...missingTerms, term],
+                missingTerms: [...missingTerms, term],
+                processedTerms: {
+                  ...processedTerms,
+                  [term]: '',
+                },
               }
             },
-            { __missing: [] }
+            { missingTerms: [], processedTerms: {} }
           )
 
           return {
