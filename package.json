@@ -1,8 +1,7 @@
 {
   "name": "poeditor-sync-service-3000",
   "version": "1.0.0",
-  "description":
-    "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
+  "description": "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
   "main": "src/handler.js",
   "config": {
     "deployProfile": "allthings-deploy",
@@ -42,16 +41,16 @@
   "homepage": "https://github.com/allthings/poeditor-sync-service-3000",
   "dependencies": {
     "alagarr": "1.0.0-1",
-    "aws-sdk": "2.162.0",
+    "aws-sdk": "2.169.0",
     "aws-xray-sdk-core": "1.1.6",
     "got": "8.0.1",
     "source-map-support": "0.5.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "0.0.22",
+    "@types/aws-lambda": "0.0.23",
     "@types/got": "7.1.5",
     "@types/jest": "21.1.8",
-    "@types/node": "8.0.54",
+    "@types/node": "8.0.58",
     "@types/source-map-support": "0.4.0",
     "aws-sdk-mock": "^1.7.0",
     "fork-ts-checker-webpack-plugin": "0.2.9",
@@ -61,7 +60,7 @@
     "json-loader": "0.5.7",
     "lint-staged": "6.0.0",
     "nsp": "3.1.0",
-    "prettier": "1.8.2",
+    "prettier": "1.9.2",
     "rimraf": "2.6.2",
     "serverless": "1.24.1",
     "serverless-offline": "3.16.0",
@@ -73,7 +72,7 @@
     "tslint-config-prettier": "1.6.0",
     "tslint-immutable": "4.4.0",
     "typescript": "2.6.2",
-    "webpack": "3.9.1"
+    "webpack": "3.10.0"
   },
   "prettier": {
     "eslintIntegration": false,
@@ -84,20 +83,34 @@
     "useTabs": false
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["yarn prettier", "yarn lint", "git add"],
-    "*.{json}": ["yarn prettier", "git add"]
+    "*.{ts,tsx}": [
+      "yarn prettier",
+      "yarn lint",
+      "git add"
+    ],
+    "*.{json}": [
+      "yarn prettier",
+      "git add"
+    ]
   },
   "jest": {
     "bail": true,
     "collectCoverage": true,
     "mapCoverage": true,
-    "roots": ["src/"],
+    "roots": [
+      "src/"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/src/test/setup.ts",
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "json"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,
@@ -106,7 +119,7 @@
         "statements": 100
       }
     },
-    "coveragePathIgnorePatterns":[
+    "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/src/test/"
     ]
