@@ -158,4 +158,31 @@ describe('The translations', () => {
     expect(translations[0].length).toBe(0)
     expect(missing.length).toBe(1)
   })
+
+  it('should be able to handle scenario where default is missing terms present in a variation', async () => {
+    const { translations, missing } = resolveTranslationsGivenTermsAndDefaults(
+      [
+        {
+          id: 1,
+          isDefault: true,
+          name: 'app',
+          normative: 'informal',
+          variation: 'residential',
+        },
+        {
+          id: 2,
+          isDefault: false,
+          name: 'app',
+          normative: 'formal',
+          variation: 'residential',
+        },
+      ],
+      [['en', '', 'fr'], ['en']],
+      [[{}], [{ 'foo.bar': '' }]]
+    )
+
+    expect(translations.length).toBe(2)
+    expect(translations[0].length).toBe(1)
+    expect(missing.length).toBe(1)
+  })
 })

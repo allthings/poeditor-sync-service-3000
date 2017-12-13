@@ -1,5 +1,6 @@
 import api from './api'
 
+// Wrapper for https://poeditor.com/docs/api#languages_list
 export default async function listProjectLanguageCodes(
   projectId: number
 ): Promise<ReadonlyArray<string>> {

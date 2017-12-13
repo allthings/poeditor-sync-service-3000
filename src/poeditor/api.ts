@@ -3,6 +3,7 @@ import kmsDecrypt from '../utils/kms'
 
 const POEDITOR_API_BASE_URL = 'https://api.poeditor.com/v2'
 
+// API Wrapper for https://poeditor.com/docs/api#overview
 export default async function poeditorApiRequest(
   method: string,
   data: any = {},

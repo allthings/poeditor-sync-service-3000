@@ -33,6 +33,25 @@ Array [
 ]
 `;
 
+exports[`The Poeditor Projects wrapper should let me filter by project name and variation 1`] = `
+Array [
+  Object {
+    "id": 73515,
+    "isDefault": true,
+    "name": "app",
+    "normative": "informal",
+    "variation": "residential",
+  },
+  Object {
+    "id": 136005,
+    "isDefault": false,
+    "name": "app",
+    "normative": "formal",
+    "variation": "residential",
+  },
+]
+`;
+
 exports[`The Poeditor Projects wrapper should let me filter by project name, variation, and normative 1`] = `
 Array [
   Object {

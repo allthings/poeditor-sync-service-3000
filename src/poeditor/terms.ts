@@ -1,5 +1,6 @@
 import api from './api'
 
+// Wrapper for https://poeditor.com/docs/api#terms_list
 export default async function listProjectLanguageTerms(
   projectId: number,
   languageCode: string

@@ -23,9 +23,17 @@ export function getProjectNameAndVariation(
   readonly normative: string | undefined
 } {
   const clean = projectName.toLowerCase() || ''
-  const [, name, variation, normative, isDefault] = clean.match(
-    /^([\w]+)[\W]*([\w]*)[\W]*([\w]*)[\W]*([\(\w\)]*)$/
-  ) || [undefined, undefined, undefined, undefined, false]
+  const [
+    ,
+    name,
+    ,
+    /* 2nd group used as delimiter */
+    variation,
+    normative,
+    isDefault,
+  ] = clean.match(
+    /^([\w]+)([\W]*)([\w\s]*)(?:\2*)([\w\s]*?)([\s]*\(default\))*$/
+  ) || [undefined, undefined, undefined, undefined, undefined, false]
 
   return {
     isDefault: !!isDefault,
@@ -37,6 +45,7 @@ export function getProjectNameAndVariation(
   }
 }
 
+// Wrapper for https://poeditor.com/docs/api#projects_list
 export default async function listProjects(
   filters?: InterfaceProjectFilter
 ): Promise<ReadonlyArray<InterfaceProject>> {

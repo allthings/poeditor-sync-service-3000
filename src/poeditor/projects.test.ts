@@ -31,6 +31,16 @@ describe('The Poeditor Projects wrapper', () => {
     expect(result).toMatchSnapshot()
   })
 
+  it('should let me filter by project name and variation', async () => {
+    const result = await projects({
+      name: 'app',
+      variation: 'residential',
+    })
+
+    expect(result.length).toBe(2)
+    expect(result).toMatchSnapshot()
+  })
+
   it('should let me filter by project name, variation, and normative', async () => {
     const result = await projects({
       name: 'app',

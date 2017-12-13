@@ -2,11 +2,6 @@ import { InterfaceProject } from './poeditor/projects'
 
 const SOURCE_LANGUAGE = process.env.SOURCE_LANGUAGE || 'en'
 
-// We need to use a symbol for a terms object key because we don't know what
-// name a term may have. E.g. a term may also be called 'missing' which would
-// conflict with our internal 'missing' key
-const MISSING_TERMS_SYMBOL = Symbol('term missing')
-
 export interface InterfaceResolvedTranslations {
   readonly translations: ReadonlyArray<any>
   readonly missing: ReadonlyArray<any>
@@ -46,6 +41,8 @@ export default function resolveTranslationsGivenTermsAndDefaults(
             missingTerms: reducedTermsMissing,
             processedTerms: reducedTerms,
           } = Object.keys(languageTerms).reduce(
+            // This starts to get a bit nested/crazy and should probably be refactored
+            // into it's own function for readability/clarity
             ({ missingTerms, processedTerms }: any, term) => {
               const termTranslation = languageTerms[term]
 
@@ -69,9 +66,12 @@ export default function resolveTranslationsGivenTermsAndDefaults(
                   defaultProjectMatchingLanguageIndex >= 0 &&
                   terms[defaultProjectIndex][
                     defaultProjectMatchingLanguageIndex
+                  ] &&
+                  terms[defaultProjectIndex][
+                    defaultProjectMatchingLanguageIndex
                   ][term]
 
-                if (defaultTermTranslation.length) {
+                if (defaultTermTranslation && defaultTermTranslation.length) {
                   return {
                     missingTerms: [...missingTerms, term],
                     processedTerms: {

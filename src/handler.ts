@@ -5,6 +5,7 @@ import getProjectLanguageCodes from './poeditor/languages'
 import getPoeditorProjects from './poeditor/projects'
 import getPoeditorProjectLanguageTerms from './poeditor/terms'
 import resolveTranslationsGivenTermsAndDefaults from './translations'
+import getProjectMetaFromPath from './utils/getProjectMetaFromPath'
 import {
   exists as s3ObjectExists,
   put as s3PutObject,
@@ -42,9 +43,7 @@ export default handler(async (request: any, response: any) => {
   /*
     1. from request path, figure out which app & stage we should process.
   */
-  const [, name, variation, normative] = path.match(
-    /^\/([^/]+)\/*([^/]*)\/*([^/]*)/
-  ) || [undefined, undefined, undefined, undefined]
+  const { name, ...projectQuery } = getProjectMetaFromPath(path)
 
   // Check that project name was included in request path
   if (!name) {
@@ -68,35 +67,33 @@ export default handler(async (request: any, response: any) => {
       { error: `Synchronisation process for "${name}" is already running.` },
       400
     )
-  } else {
-    // No lock exists. Create one!
-    const lockData = {
-      date: Date.now(),
-      name,
-      variation,
-    }
+  }
 
-    if (
-      !await s3PutObject(lockObjectKey, lockData, {
-        Expires: lockData.date + 300,
-      })
-    ) {
-      // @TODO: just throw ClientError
-      return response.json(
-        {
-          error: `Unable to gain a lock on synchronisation process for "${
-            name
-          }".`,
-        },
-        400
-      )
-    }
+  // No lock exists. Create one!
+  const lockData = {
+    date: Date.now(),
+    name,
+    ...projectQuery,
+  }
+
+  if (
+    !await s3PutObject(lockObjectKey, lockData, {
+      Expires: lockData.date + 300,
+    })
+  ) {
+    // @TODO: just throw ClientError
+    return response.json(
+      {
+        error: `Unable to gain a lock for "${name}" synchronisation process.`,
+      },
+      400
+    )
   }
 
   /*
     3. Get POEditor projects which match application name from step #1
   */
-  const projects = await getPoeditorProjects({ name, variation, normative })
+  const projects = await getPoeditorProjects({ name, ...projectQuery })
 
   // Check that the variation exists
   if (Object.keys(projects).length === 0) {
@@ -129,11 +126,6 @@ export default handler(async (request: any, response: any) => {
     )
   )
 
-  console.log(
-    'we have reached this point',
-    projects,
-    termsForEachProjectLanguage
-  )
   /*
     6. Merge project defaults with variation (check for empty strings, too)
   */
@@ -143,19 +135,29 @@ export default handler(async (request: any, response: any) => {
     termsForEachProjectLanguage
   )
 
-  console.log('handler translations', translations, missing)
   /*
     7. Save dat shiiiit to s3.
   */
-  /*
-  Promise.all(
-    projects.map(project =>
-      s3PutObject(
-        `${name}/${stage}/${languageCode}-${variation}-${normative}.json`,
-        translationPayload
+  try {
+    const saved = await Promise.all(
+      projects.map((project, projectIndex) =>
+        s3PutObject(
+          `${project.name}/${STAGE}/${languageCode}-${variation}-${
+            normative
+          }.json`,
+          translationPayload
+        )
       )
     )
-  )*/
+  } catch (error) {
+    // @TODO: just throw ServerError
+    return response.json(
+      {
+        error: `There was an error saving translations to S3.`,
+      },
+      500
+    )
+  }
 
   /*
     8. Delete the cheap-lock
@@ -166,7 +168,7 @@ export default handler(async (request: any, response: any) => {
     We're done!
   */
   return response.json({
-    message: 'Hi.',
+    message: 'Translation synchronisation completed.',
     missing,
     path,
     projects,
