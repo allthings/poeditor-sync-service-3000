@@ -1,4 +1,4 @@
-import handler from 'alagarr'
+import * as handler from 'alagarr'
 import * as AwsXray from 'aws-xray-sdk-core'
 import 'source-map-support/register'
 import getProjectLanguageCodes from './poeditor/languages'
