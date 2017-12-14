@@ -110,6 +110,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
                 },
               }
             },
+            // this is the .reduce()'s initial value
             { missingTerms: [], processedTerms: {} }
           )
 
@@ -126,6 +127,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
             ],
           }
         },
+        // this is the .reduce()'s initial value
         { missing: {}, translatedProjectLanguages: [] }
       )
       return {
@@ -144,6 +146,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
         translations: [...translations, reducedProject],
       }
     },
+    // this is the .reduce()'s initial value
     { missing: [], translations: [] }
   )
 }

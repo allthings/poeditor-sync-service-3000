@@ -14,9 +14,9 @@
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.6.0.tgz#383f456b26bc96c7889f0332079f4358b16c58dc"
 
-"@types/aws-lambda@0.0.23":
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-0.0.23.tgz#a45476fe1847eeae7cc7676a790c47acb49cfd3b"
+"@types/aws-lambda@0.0.24":
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-0.0.24.tgz#79e4ef418f299d7430aca414178864806968415e"
 
 "@types/got@7.1.5":
   version "7.1.5"
@@ -32,13 +32,9 @@
   version "21.1.8"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.8.tgz#d497213725684f1e5a37900b17a47c9c018f1a97"
 
-"@types/node@*":
+"@types/node@*", "@types/node@8.5.1":
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.1.tgz#4ec3020bcdfe2abffeef9ba3fbf26fca097514b5"
-
-"@types/node@8.0.58":
-  version "8.0.58"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.58.tgz#5b3881c0be3a646874803fee3197ea7f1ed6df90"
 
 "@types/source-map-support@0.4.0":
   version "0.4.0"
