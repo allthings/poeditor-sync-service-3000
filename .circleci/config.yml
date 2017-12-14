@@ -32,6 +32,7 @@ jobs:
           name: Lint
           command: npm run lint
 
+  # runs the unit tests
   unit-test:
     docker:
       - image: circleci/node:8
