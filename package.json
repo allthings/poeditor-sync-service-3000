@@ -125,7 +125,7 @@
       "/node_modules/",
       "/src/test/",
       "/src/utils/s3",
-      "/src/utils/kms"      
+      "/src/utils/kms"
     ]
   }
 }
