@@ -25,7 +25,7 @@ log() {
 }
 
 # Check node_modules integrity
-yarn check --integrity
+yarn check
 
 # Iterate over the dependency requirements:
 while IFS= read -r REQUIREMENT; do

@@ -1,4 +1,4 @@
-import * as handler from 'alagarr'
+import handler from 'alagarr'
 import * as AwsXray from 'aws-xray-sdk-core'
 import 'source-map-support/register'
 import getProjectLanguageCodes from './poeditor/languages'
@@ -12,7 +12,7 @@ import {
   remove as s3RemoveObject,
 } from './utils/s3'
 
-const { STAGE = 'development' } = process.env
+const { STAGE } = process.env
 const IS_PRODUCTION = STAGE !== 'development'
 
 const handlerConfig = {
@@ -59,7 +59,7 @@ export default handler(async (request: any, response: any) => {
     Cheap lock implemented as an object in S3. In case of a crash,
     the S3 object will automatically expire after 300 seconds (5 minutes).
   */
-  const lockObjectKey = `${name}/translation-sync.lock`
+  const lockObjectKey = `${name}/${STAGE}/i18n/translation-sync.lock`
 
   if (await s3ObjectExists(lockObjectKey)) {
     // @TODO: just throw ClientError
@@ -78,7 +78,7 @@ export default handler(async (request: any, response: any) => {
 
   if (
     !await s3PutObject(lockObjectKey, lockData, {
-      Expires: lockData.date + 300,
+      Expires: new Date(Date.now() + 300 * 1000).toISOString(),
     })
   ) {
     // @TODO: just throw ClientError
@@ -138,30 +138,27 @@ export default handler(async (request: any, response: any) => {
   /*
     7. Save dat shiiiit to s3.
   */
-  try {
-    const saved = await Promise.all(
-      projects.map((project, projectIndex) =>
-        s3PutObject(
-          `${project.name}/${STAGE}/${languageCode}-${variation}-${
-            normative
-          }.json`,
-          translationPayload
+  // tslint:disable-next-line:no-expression-statement
+  await Promise.all(
+    projects.map(({ name: projectName, variation, normative }, projectIndex) =>
+      Promise.all(
+        listOfEachProjectsLanguageCodes[projectIndex].map(
+          (languageCode, languageIndex) =>
+            s3PutObject(
+              `${projectName}/${STAGE}/i18n/${languageCode}/${
+                variation ? variation : 'default'
+              }${normative ? `-${normative}` : ''}.json`,
+              translations[projectIndex][languageIndex]
+            )
         )
       )
     )
-  } catch (error) {
-    // @TODO: just throw ServerError
-    return response.json(
-      {
-        error: `There was an error saving translations to S3.`,
-      },
-      500
-    )
-  }
+  )
 
   /*
     8. Delete the cheap-lock
   */
+  // tslint:disable-next-line:no-expression-statement
   await s3RemoveObject(lockObjectKey)
 
   /*

@@ -7,6 +7,7 @@ them into AWS S3.
 # Contents
 
 1. [Installation / Setup](#installation--setup)
+   1. [POEditor Setup](#poeditor-setup)
 1. [Local Development](#local-development)
 1. [Testing](#testing)
 1. [Encrypting Secrets](#encrypting-secrets)
@@ -20,6 +21,15 @@ them into AWS S3.
 ```sh
 yarn install
 ```
+
+### POEditor Setup
+
+project naming convention:
+
+ProjectName - Variation - Normative (default)
+ProjectName - Variation - Normative
+ProjectName - Variation
+ProjectName
 
 ## Local Development
 
@@ -37,10 +47,7 @@ Try out the webhook with `curl`:
 
 ```sh
 curl -s \
-  -X POST \
-  -H "content-type: application/json" \
-  -d '{"id":"s1d2f34","foo":"bar"}' \
-  http://localhost:3000/webhook | \
+  http://localhost:3000/projectName/variation/normative | \
   jq
 ```
 
@@ -80,6 +87,12 @@ provider:
 ```
 
 ## Deployment
+
+Make sure to set/export env variables appropriately:
+
+POEDITOR_TOKEN
+AWS_KMS_KEY_ARN
+AWS_ACCOUNT_ID
 
 ### Staging
 

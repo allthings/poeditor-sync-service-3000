@@ -139,5 +139,12 @@ Array [
     "normative": "formal",
     "variation": "residential",
   },
+  Object {
+    "id": 0,
+    "isDefault": false,
+    "name": "foobar",
+    "normative": undefined,
+    "variation": undefined,
+  },
 ]
 `;

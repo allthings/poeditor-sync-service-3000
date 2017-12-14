@@ -27,7 +27,7 @@ export function getProjectNameAndVariation(
     ,
     name,
     ,
-    /* 2nd group used as delimiter */
+    /* above skipped index is 2nd regex group, used as delimiter */
     variation,
     normative,
     isDefault,

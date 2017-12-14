@@ -4,10 +4,12 @@
   "description": "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
   "main": "src/handler.js",
   "config": {
+    "//": "these are best set in your environment",
     "deployProfile": "allthings-deploy",
     "awsAccountId": "000000000000",
     "awsKmsKeyArn": "arn:aws:kms:eu-west-1:000000000000:key/67fakse7-5e4f-48f1-9949-95fake73bb7",
-    "awsRegion": "eu-west-1"
+    "awsRegion": "eu-west-1",
+    "poeditorToken": "AQECAHj6Y8swFFZ8sg2A5LDqzMqXTngYQ4IY+YtXTBbxtG0Z0wAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDACN9uSCxbRTpb+JbgIBEIA7mGwuuKExxZnzbmPJt/5Se/CFYf2MN+EiIh3pAAL+G2xHz4hJYsqPi65JjOD4hiugPsAoqI5O/6Cm4JE="
   },
   "scripts": {
     "build": "npm run clean && tsc -d",
@@ -22,9 +24,9 @@
     "precommit": "lint-staged",
     "pretest": "npm run clean",
     "prettier": "prettier --write",
-    "preversion": "yarn security-check && yarn lint && yarn test",
+    "preversion": "yarn check --integrity && yarn security-check && yarn lint && yarn test",
     "postversion": "git push --tags origin HEAD && scripts/deploy.sh",
-    "security-check": "nsp",
+    "security-check": "nsp check",
     "test": "jest",
     "watch:test": "jest --watch",
     "upgrade-dependencies": "yarn upgrade-interactive --latest --exact"
@@ -52,7 +54,7 @@
     "@types/jest": "21.1.8",
     "@types/node": "8.0.58",
     "@types/source-map-support": "0.4.0",
-    "aws-sdk-mock": "^1.7.0",
+    "aws-sdk-mock": "1.7.0",
     "fork-ts-checker-webpack-plugin": "0.2.9",
     "happypack": "4.0.0",
     "husky": "0.14.3",
@@ -113,15 +115,17 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
       }
     },
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/src/test/"
+      "/src/test/",
+      "/src/utils/s3",
+      "/src/utils/kms"      
     ]
   }
 }

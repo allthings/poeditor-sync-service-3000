@@ -37,6 +37,13 @@ export default {
         open: 0,
         public: 0,
       },
+      {
+        created: '2016-12-12T13:52:44+0000',
+        id: 0,
+        name: 'Foobar',
+        open: 0,
+        public: 0,
+      },
     ],
   },
 }
