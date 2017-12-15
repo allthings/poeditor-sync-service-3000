@@ -1,10 +1,18 @@
-import handler from 'alagarr'
-// @TODO: aws-xray-sdk-core sucks. it's full of bloat.
+import * as handler from 'alagarr'
 import * as AwsXray from 'aws-xray-sdk-core'
 import 'source-map-support/register'
-import kmsDecrypt from './utils/kms'
+import getProjectLanguageCodes from './poeditor/languages'
+import getPoeditorProjects from './poeditor/projects'
+import getPoeditorProjectLanguageTerms from './poeditor/terms'
+import resolveTranslationsGivenTermsAndDefaults from './translations'
+import getProjectMetaFromPath from './utils/getProjectMetaFromPath'
+import {
+  exists as s3ObjectExists,
+  put as s3PutObject,
+  remove as s3RemoveObject,
+} from './utils/s3'
 
-const { STAGE = 'development', CDN_HOST_URL = '' } = process.env
+const { STAGE } = process.env
 const IS_PRODUCTION = STAGE !== 'development'
 
 const handlerConfig = {
@@ -30,8 +38,136 @@ if (IS_PRODUCTION) {
 }
 
 export default handler(async (request: any, response: any) => {
-  const POEDITOR_TOKEN = await kmsDecrypt(process.env.POEDITOR_TOKEN || '') // result gets cached :-)
-  const { body } = request
+  const { path } = request
 
-  return response.json({ message: 'Hi.', body })
+  /*
+    1. from request path, figure out which app & stage we should process.
+  */
+  const { name, ...projectQuery } = getProjectMetaFromPath(path)
+
+  // Check that project name was included in request path
+  if (!name) {
+    // @TODO: just throw ClientError
+    return response.json(
+      { error: `Project name missing from request URL ${path}` },
+      400
+    )
+  }
+
+  /*
+    2. Check if another synchronisation process is already running.
+    Cheap lock implemented as an object in S3. In case of a crash,
+    the S3 object will automatically expire after 300 seconds (5 minutes).
+  */
+  const lockObjectKey = `${name}/${STAGE}/i18n/translation-sync.lock`
+
+  if (await s3ObjectExists(lockObjectKey)) {
+    // @TODO: just throw ClientError
+    return response.json(
+      { error: `Synchronisation process for "${name}" is already running.` },
+      400
+    )
+  }
+
+  // No lock exists. Create one!
+  const lockData = {
+    date: Date.now(),
+    name,
+    ...projectQuery,
+  }
+
+  if (
+    !await s3PutObject(lockObjectKey, lockData, {
+      Expires: new Date(Date.now() + 300 * 1000).toISOString(),
+    })
+  ) {
+    // @TODO: just throw ClientError
+    return response.json(
+      {
+        error: `Unable to gain a lock for "${name}" synchronisation process.`,
+      },
+      400
+    )
+  }
+
+  /*
+    3. Get POEditor projects which match application name from step #1
+  */
+  const projects = await getPoeditorProjects({ name, ...projectQuery })
+
+  // Check that the variation exists
+  if (Object.keys(projects).length === 0) {
+    // @TODO: just throw ClientError
+    return response.json(
+      {
+        error: `There is no POEditor project matching ${path}`,
+      },
+      400
+    )
+  }
+
+  /*
+    4. Get list of translation language codes for each project-variation
+  */
+  const listOfEachProjectsLanguageCodes = await Promise.all(
+    projects.map(({ id }) => getProjectLanguageCodes(id))
+  )
+
+  /*
+    5. Get all translations for each language, for each project-variations
+  */
+  const termsForEachProjectLanguage = await Promise.all(
+    projects.map((project, projectIndex) =>
+      Promise.all(
+        listOfEachProjectsLanguageCodes[projectIndex].map(languageCode =>
+          getPoeditorProjectLanguageTerms(project.id, languageCode)
+        )
+      )
+    )
+  )
+
+  /*
+    6. Merge project defaults with variation (check for empty strings, too)
+  */
+  const { translations, missing } = resolveTranslationsGivenTermsAndDefaults(
+    projects,
+    listOfEachProjectsLanguageCodes,
+    termsForEachProjectLanguage
+  )
+
+  /*
+    7. Save dat shiiiit to s3.
+  */
+  // tslint:disable-next-line:no-expression-statement
+  await Promise.all(
+    projects.map(({ name: projectName, variation, normative }, projectIndex) =>
+      Promise.all(
+        listOfEachProjectsLanguageCodes[projectIndex].map(
+          (languageCode, languageIndex) =>
+            s3PutObject(
+              `${projectName}/${STAGE}/i18n/${languageCode}/${
+                variation ? variation : 'default'
+              }${normative ? `-${normative}` : ''}.json`,
+              translations[projectIndex][languageIndex]
+            )
+        )
+      )
+    )
+  )
+
+  /*
+    8. Delete the cheap-lock
+  */
+  // tslint:disable-next-line:no-expression-statement
+  await s3RemoveObject(lockObjectKey)
+
+  /*
+    We're done!
+  */
+  return response.json({
+    message: 'Translation synchronisation completed.',
+    missing,
+    path,
+    projects,
+  })
 }, handlerConfig)

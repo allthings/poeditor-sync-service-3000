@@ -1,6 +1,6 @@
 service: 
   name: ${self:custom.package.name}
-  # awsKmsKeyArn: ${env:AWS_KMS_KEY_ARN, self:custom.package.config.awsKmsKeyArn} # use a custom kms key
+  awsKmsKeyArn: ${env:AWS_KMS_KEY_ARN, self:custom.package.config.awsKmsKeyArn} # use a custom kms key
 
 custom:
   awsAccountId: ${env:AWS_ACCOUNT_ID, self:custom.package.config.awsAccountId}
@@ -19,20 +19,23 @@ provider:
   runtime: nodejs6.10
   stage: ${env:STAGE, self:custom.defaultStage}
   region: ${self:custom.package.config.awsRegion}
-  role: arn:aws:iam::${self:custom.awsAccountId}:role/aws-lambda-basic-execution-role
+  role: arn:aws:iam::${self:custom.awsAccountId}:role/aws-lambda-localization-sync-role
   deploymentBucket: allthings-lambda-deployments-${self:provider.region}
   versionFunctions: ${self:custom.versioning.${self:provider.stage}, self:custom.versioning.default} 
   environment: 
     STAGE: ${self:provider.stage}
     NODE_ENV: ${env:NODE_ENV, self:custom.defaultEnvironment}
+    AWS_S3_BUCKET: allthings-static
+    SOURCE_LANGUAGE: en # this is the default language which original/source strings are written in
+    POEDITOR_TOKEN: ${env:POEDITOR_TOKEN, self:custom.package.config.poeditorToken}
 
 plugins:
   - serverless-webpack
   - serverless-offline
 
 functions:
-  boilerplateHandler:
-    description: Boilerplate Handler
+  poets:
+    description: POEditor translation synchronisation service
     memorySize: 512
     timeout: 30
     handler: src/handler.default
@@ -46,8 +49,13 @@ functions:
 
 resources:
   Resources:
+    ApiGatewayRestApi:
+      Properties:
+        BinaryMediaTypes:
+          - "*/*"
+  
     # Enable X-Ray tracing on Lambda functions
-    BoilerplateHandlerLambdaFunction:
+    PoetsLambdaFunction:
       Properties:
         TracingConfig:
           Mode: ${self:custom.xrayTracingMode}

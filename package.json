@@ -1,14 +1,15 @@
 {
   "name": "poeditor-sync-service-3000",
   "version": "1.0.0",
-  "description":
-    "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
+  "description": "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
   "main": "src/handler.js",
   "config": {
+    "//": "these are best set in your environment",
     "deployProfile": "allthings-deploy",
     "awsAccountId": "000000000000",
     "awsKmsKeyArn": "arn:aws:kms:eu-west-1:000000000000:key/67fakse7-5e4f-48f1-9949-95fake73bb7",
-    "awsRegion": "eu-west-1"
+    "awsRegion": "eu-west-1",
+    "poeditorToken": "AQECAHj6Y8swFFZ8sg2A5LDqzMqXTngYQ4IY+YtXTBbxtG0Z0wAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDACN9uSCxbRTpb+JbgIBEIA7mGwuuKExxZnzbmPJt/5Se/CFYf2MN+EiIh3pAAL+G2xHz4hJYsqPi65JjOD4hiugPsAoqI5O/6Cm4JE="
   },
   "scripts": {
     "build": "npm run clean && tsc -d",
@@ -23,73 +24,108 @@
     "precommit": "lint-staged",
     "pretest": "npm run clean",
     "prettier": "prettier --write",
-    "preversion": "yarn security-check && yarn lint && yarn test",
+    "preversion": "yarn check --integrity && yarn security-check && yarn lint && yarn test",
     "postversion": "git push --tags origin HEAD && scripts/deploy.sh",
-    "security-check": "nsp",
+    "security-check": "nsp check",
     "test": "jest",
     "watch:test": "jest --watch",
     "upgrade-dependencies": "yarn upgrade-interactive --latest --exact"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allthings/serverless-boilerplates.git"
+    "url": "git+https://github.com/allthings/poeditor-sync-service-3000.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/allthings/serverless-boilerplates/issues"
+    "url": "https://github.com/allthings/poeditor-sync-service-3000/issues"
   },
-  "homepage": "https://github.com/allthings/serverless-boilerplates/blob/master/typescript",
+  "homepage": "https://github.com/allthings/poeditor-sync-service-3000",
   "dependencies": {
     "alagarr": "1.0.0-1",
-    "aws-sdk": "2.158.0",
+    "aws-sdk": "2.169.0",
     "aws-xray-sdk-core": "1.1.6",
+    "got": "8.0.1",
     "source-map-support": "0.5.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "0.0.21",
+    "@types/aws-lambda": "0.0.24",
+    "@types/got": "7.1.5",
     "@types/jest": "21.1.8",
-    "@types/node": "8.0.53",
+    "@types/node": "8.5.1",
     "@types/source-map-support": "0.4.0",
+    "aws-sdk-mock": "1.7.0",
     "fork-ts-checker-webpack-plugin": "0.2.9",
     "happypack": "4.0.0",
     "husky": "0.14.3",
     "jest": "21.2.1",
     "json-loader": "0.5.7",
-    "lint-staged": "5.0.0",
+    "lint-staged": "6.0.0",
     "nsp": "3.1.0",
-    "prettier": "1.8.2",
+    "prettier": "1.9.2",
     "rimraf": "2.6.2",
     "serverless": "1.24.1",
     "serverless-offline": "3.16.0",
     "serverless-webpack": "4.1.0",
-    "ts-jest": "21.2.3",
-    "ts-loader": "3.1.1",
+    "smid": "0.1.1",
+    "ts-jest": "21.2.4",
+    "ts-loader": "3.2.0",
     "tslint": "5.8.0",
     "tslint-config-prettier": "1.6.0",
     "tslint-immutable": "4.4.0",
     "typescript": "2.6.2",
-    "webpack": "3.8.1"
+    "webpack": "3.10.0"
   },
   "prettier": {
     "eslintIntegration": false,
-    "printWidth": 100,
+    "printWidth": 80,
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5",
     "useTabs": false
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["yarn prettier", "yarn lint", "git add"],
-    "*.{json}": ["yarn prettier", "git add"]
+    "*.{ts,tsx}": [
+      "yarn prettier",
+      "yarn lint",
+      "git add"
+    ],
+    "*.{json}": [
+      "yarn prettier",
+      "git add"
+    ]
   },
   "jest": {
     "bail": true,
     "collectCoverage": true,
+    "mapCoverage": true,
+    "roots": [
+      "src/"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/src/test/setup.ts",
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "json"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/test/",
+      "/src/utils/s3",
+      "/src/utils/kms"
+    ]
   }
 }

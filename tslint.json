@@ -1,5 +1,10 @@
 {
-  "extends": ["tslint:recommended", "tslint:latest", "tslint-config-prettier", "tslint-immutable"],
+  "extends": [
+    "tslint:recommended",
+    "tslint:latest",
+    "tslint-config-prettier",
+    "tslint-immutable"
+  ],
   "rules": {
     "jsdoc-format": true,
     "comment-format": [true, "check-space"],

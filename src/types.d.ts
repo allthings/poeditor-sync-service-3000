@@ -2,3 +2,4 @@
 
 declare module 'alagarr'
 declare module 'aws-xray-sdk-core'
+declare module 'aws-sdk-mock'

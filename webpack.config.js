@@ -47,6 +47,8 @@ module.exports = {
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),
+    // https://github.com/sindresorhus/got/issues/345#issuecomment-329939488
+    new webpack.IgnorePlugin(/^electron$/),
   ],
   resolve: {
     extensions: ['.ts', '.js'],

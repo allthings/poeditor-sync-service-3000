@@ -1,11 +1,13 @@
 # poeditor-sync-service-3000
 
 AWS Lambda/API Gateway service to sync project translations from the
-[POEditor](https://poeditor.com/) [API](https://poeditor.com/docs/api) and stick them into AWS S3.
+[POEditor](https://poeditor.com/) [API](https://poeditor.com/docs/api) and stick
+them into AWS S3.
 
 # Contents
 
 1. [Installation / Setup](#installation--setup)
+   1. [POEditor Setup](#poeditor-setup)
 1. [Local Development](#local-development)
 1. [Testing](#testing)
 1. [Encrypting Secrets](#encrypting-secrets)
@@ -20,10 +22,20 @@ AWS Lambda/API Gateway service to sync project translations from the
 yarn install
 ```
 
+### POEditor Setup
+
+project naming convention:
+
+ProjectName - Variation - Normative (default)
+ProjectName - Variation - Normative
+ProjectName - Variation
+ProjectName
+
 ## Local Development
 
-Best practice is to develop locally using a TDD approach. The boilerplate includes sample tests on
-which you can build, including example of how to mock AWS services.
+Best practice is to develop locally using a TDD approach. The boilerplate
+includes sample tests on which you can build, including example of how to mock
+AWS services.
 
 Start the development environment with:
 
@@ -35,10 +47,7 @@ Try out the webhook with `curl`:
 
 ```sh
 curl -s \
-  -X POST \
-  -H "content-type: application/json" \
-  -d '{"id":"s1d2f34","foo":"bar"}' \
-  http://localhost:3000/webhook | \
+  http://localhost:3000/projectName/variation/normative | \
   jq
 ```
 
@@ -56,13 +65,15 @@ yarn watch:test
 
 ## Encrypting Secrets
 
-In production, encrypt sensitive environment variables or other secret strings with KMS:
+In production, encrypt sensitive environment variables or other secret strings
+with KMS:
 
 ```sh
 yarn encrypt-string "super secret string"
 ```
 
-To deploy secrets as part of an environment variable, add it to `serverless.yml` like so:
+To deploy secrets as part of an environment variable, add it to `serverless.yml`
+like so:
 
 ```yaml
 service:
@@ -76,6 +87,12 @@ provider:
 ```
 
 ## Deployment
+
+Make sure to set/export env variables appropriately:
+
+POEDITOR_TOKEN
+AWS_KMS_KEY_ARN
+AWS_ACCOUNT_ID
 
 ### Staging
 
