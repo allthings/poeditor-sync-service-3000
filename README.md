@@ -24,12 +24,16 @@ yarn install
 
 ### POEditor Setup
 
-project naming convention:
+POEditor project's should be named according to the following naming convention:
 
-ProjectName - Variation - Normative (default)
-ProjectName - Variation - Normative
-ProjectName - Variation
-ProjectName
+* ProjectName - Variation - Normative (default)
+  e.g. App - Residential - Informal (default)
+* ProjectName - Variation - Normative
+  e.g. App - Residential - Informal
+* ProjectName - Variation
+  e.g. App - Residential
+* ProjectName
+  e.g. App
 
 ## Local Development
 
@@ -90,9 +94,9 @@ provider:
 
 Make sure to set/export env variables appropriately:
 
-POEDITOR_TOKEN
-AWS_KMS_KEY_ARN
-AWS_ACCOUNT_ID
+* **POEDITOR_TOKEN**: a POEditor Token encrypted with the KMS key specified by _AWS_KMS_KEY_ARN_
+* **AWS_KMS_KEY_ARN**: ARN of the AWS KMS key which will be used by AWS Lambda to decrypt secrets (e.g. POEDITOR_TOKEN)
+* **AWS_ACCOUNT_ID**: AWS Account ID
 
 ### Staging
 
