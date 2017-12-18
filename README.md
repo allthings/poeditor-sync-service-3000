@@ -37,9 +37,7 @@ POEditor project's should be named according to the following naming convention:
 
 ## Local Development
 
-Best practice is to develop locally using a TDD approach. The boilerplate
-includes sample tests on which you can build, including example of how to mock
-AWS services.
+Best practice is to develop locally using a TDD approach.
 
 Start the development environment with:
 
