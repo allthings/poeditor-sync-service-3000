@@ -98,11 +98,14 @@ export default handler(async (request: any, response: any) => {
   // Check that the variation exists
   if (Object.keys(projects).length === 0) {
     // @TODO: just throw ClientError
-    return (await s3RemoveObject(lockObjectKey)) && response.json(
-      {
-        error: `There is no POEditor project matching ${path}`,
-      },
-      400
+    return (
+      (await s3RemoveObject(lockObjectKey)) &&
+      response.json(
+        {
+          error: `There is no POEditor project matching ${path}`,
+        },
+        400
+      )
     )
   }
 

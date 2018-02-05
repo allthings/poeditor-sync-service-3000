@@ -42,11 +42,11 @@
   },
   "homepage": "https://github.com/allthings/poeditor-sync-service-3000",
   "dependencies": {
-    "alagarr": "1.0.0-1",
-    "aws-sdk": "2.169.0",
-    "aws-xray-sdk-core": "1.1.6",
-    "got": "8.0.1",
-    "source-map-support": "0.5.0"
+    "alagarr": "1.0.0-22",
+    "aws-sdk": "2.188.0",
+    "aws-xray-sdk-core": "1.1.7",
+    "got": "8.0.3",
+    "source-map-support": "0.5.3"
   },
   "devDependencies": {
     "@types/aws-lambda": "0.0.24",
