@@ -1,3 +1,4 @@
+import { ServerError } from 'alagarr'
 import * as get from 'got'
 import kmsDecrypt from '../utils/kms'
 
@@ -12,8 +13,7 @@ export default async function poeditorApiRequest(
   const apiToken = await kmsDecrypt(POEDITOR_TOKEN || '')
 
   if (!apiToken.length) {
-    // @TODO: use ApiError()
-    throw new Error('POEDITOR_TOKEN environment variable is not set.')
+    throw new ServerError('POEDITOR_TOKEN environment variable is not set.')
   }
 
   try {
@@ -29,12 +29,13 @@ export default async function poeditorApiRequest(
     })
 
     if (Number(response.body.response.code) !== 200) {
-      throw new Error(`Poeditor API error: ${response.body.response.message}`)
+      throw new ServerError(
+        `Poeditor API error: ${response.body.response.message}`
+      )
     }
 
     return response.body
   } catch (error) {
-    // @TODO: use ApiError
-    throw error
+    throw new ServerError(error)
   }
 }

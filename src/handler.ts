@@ -1,4 +1,4 @@
-import * as handler from 'alagarr'
+import handler, { ClientError } from 'alagarr'
 import * as AwsXray from 'aws-xray-sdk-core'
 import 'source-map-support/register'
 import getProjectLanguageCodes from './poeditor/languages'
@@ -20,6 +20,7 @@ const handlerConfig = {
     'default-src': "'self'",
   },
   enableCompression: IS_PRODUCTION,
+  // errorHandler: (_: any, response: any, error: any) => response.json(error),
   headers: {
     'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
   },
@@ -47,25 +48,29 @@ export default handler(async (request: any, response: any) => {
 
   // Check that project name was included in request path
   if (!name) {
-    // @TODO: just throw ClientError
-    return response.json(
-      { error: `Project name missing from request URL ${path}` },
-      400
-    )
+    throw new ClientError(`Project name missing from request URL ${path}`)
   }
 
   /*
-    2. Check if another synchronisation process is already running.
+    2. Get POEditor projects which match application name from step #1
+  */
+  const projects = await getPoeditorProjects({ name, ...projectQuery })
+
+  // Check that the variation exists
+  if (Object.keys(projects).length === 0) {
+    throw new ClientError(`There is no POEditor project matching ${path}`)
+  }
+
+  /*
+    3. Check if another synchronisation process is already running.
     Cheap lock implemented as an object in S3. In case of a crash,
     the S3 object will automatically expire after 300 seconds (5 minutes).
   */
   const lockObjectKey = `${name}/${STAGE}/i18n/translation-sync.lock`
 
   if (await s3ObjectExists(lockObjectKey)) {
-    // @TODO: just throw ClientError
-    return response.json(
-      { error: `Synchronisation process for "${name}" is already running.` },
-      400
+    throw new ClientError(
+      `Synchronisation process for "${name}" is already running.`
     )
   }
 
@@ -81,31 +86,8 @@ export default handler(async (request: any, response: any) => {
       Expires: new Date(Date.now() + 300 * 1000).toISOString(),
     })
   ) {
-    // @TODO: just throw ClientError
-    return response.json(
-      {
-        error: `Unable to gain a lock for "${name}" synchronisation process.`,
-      },
-      400
-    )
-  }
-
-  /*
-    3. Get POEditor projects which match application name from step #1
-  */
-  const projects = await getPoeditorProjects({ name, ...projectQuery })
-
-  // Check that the variation exists
-  if (Object.keys(projects).length === 0) {
-    // @TODO: just throw ClientError
-    return (
-      (await s3RemoveObject(lockObjectKey)) &&
-      response.json(
-        {
-          error: `There is no POEditor project matching ${path}`,
-        },
-        400
-      )
+    throw new ClientError(
+      `Unable to gain a lock for "${name}" synchronisation process.`
     )
   }
 
@@ -151,7 +133,8 @@ export default handler(async (request: any, response: any) => {
               `${projectName}/${STAGE}/i18n/${languageCode}/${
                 variation ? variation : 'default'
               }${normative ? `-${normative}` : ''}.json`,
-              translations[projectIndex][languageIndex]
+              translations[projectIndex][languageIndex],
+              { ContentType: 'application/json' }
             )
         )
       )
