@@ -42,6 +42,7 @@ export const mockRequestContext: AWSLambda.APIGatewayEventRequestContext = {
     userArn: null,
   },
   requestId: 'foobar',
+  requestTimeEpoch: 1,
   resourceId: 'foobar',
   resourcePath: 'foobar',
   stage: 'foobar',
