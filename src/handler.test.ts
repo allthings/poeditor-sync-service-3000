@@ -10,7 +10,7 @@ const mockRequest = {
 }
 
 mockAWS.mock('S3', 'headObject', (params: any, callback: any) => {
-  if (params.Key.includes('lock-already-exists')) {
+  if (params.Key.includes('lockalreadyexists')) {
     return callback(null, {})
   }
 
@@ -18,7 +18,7 @@ mockAWS.mock('S3', 'headObject', (params: any, callback: any) => {
 })
 
 mockAWS.mock('S3', 'putObject', (params: any, callback: any) => {
-  if (params.Key.includes('cannot-create')) {
+  if (params.Key.includes('cannotcreate')) {
     return callback(new Error())
   }
 
@@ -58,7 +58,7 @@ describe('The handler', () => {
   it('should return 400 if a lock already exists', async () => {
     const result = await handlerPromise({
       ...mockRequest,
-      path: '/lock-already-exists',
+      path: '/lockalreadyexists',
     })
 
     expect(result.statusCode).toBe(400)
@@ -68,7 +68,7 @@ describe('The handler', () => {
   it('should return 400 if we cannot create a new lock', async () => {
     const result = await handlerPromise({
       ...mockRequest,
-      path: '/cannot-create',
+      path: '/cannotcreate',
     })
 
     expect(result.statusCode).toBe(400)

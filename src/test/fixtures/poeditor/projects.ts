@@ -44,6 +44,8 @@ export default {
         open: 0,
         public: 0,
       },
+      { name: 'lockalreadyexists' },
+      { name: 'cannotcreate' },
     ],
   },
 }

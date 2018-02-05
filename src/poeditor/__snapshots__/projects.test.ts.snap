@@ -146,5 +146,19 @@ Array [
     "normative": undefined,
     "variation": undefined,
   },
+  Object {
+    "id": undefined,
+    "isDefault": false,
+    "name": "lockalreadyexists",
+    "normative": undefined,
+    "variation": undefined,
+  },
+  Object {
+    "id": undefined,
+    "isDefault": false,
+    "name": "cannotcreate",
+    "normative": undefined,
+    "variation": undefined,
+  },
 ]
 `;
