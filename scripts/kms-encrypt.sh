@@ -1,15 +1,7 @@
 #!/bin/sh
 
 #
-# Exports deployment configuration as environment variables.
-#
-# The deployment stage is identified based on the git tag:
-# * Untagged commits go to staging.
-# * Prerelease tags go to prerelease.
-# * Other tags go to production.
-# 
-# Arguments after the end of options (identified by "--") are executed as
-# command, which inherits the exported variables.
+# Encrypts the provided string based on the AWS KMS Key in $AWS_KMS_KEY_ARN
 #
 # Usage: ./kms-encrypt.sh string-to-encrypt
 #
