@@ -16,13 +16,15 @@ export default async function listProjectLanguageTerms(
       (
         terms: any,
         {
+          reference,
           term,
           translation: { content },
         }: {
+          readonly reference: string
           readonly term: string
           readonly translation: { readonly content: string }
         }
-      ) => ({ ...terms, [term]: content }),
+      ) => ({ ...terms, [term]: content || reference }),
       {}
     )
   )
