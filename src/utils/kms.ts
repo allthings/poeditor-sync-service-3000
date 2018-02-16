@@ -34,5 +34,5 @@ export default async function decrypt(
     return kmsDecrypt(ciphertext)
   }
 
-  return Promise.all(ciphertext.map(text => kmsDecrypt(text)))
+  return Promise.all(ciphertext.map(kmsDecrypt))
 }

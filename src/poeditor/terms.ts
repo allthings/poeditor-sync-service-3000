@@ -1,5 +1,10 @@
 import api from './api'
 
+interface InterfacePoeditorTerm {
+  readonly term: string
+  readonly translation: { readonly content: string }
+}
+
 // Wrapper for https://poeditor.com/docs/api#terms_list
 export default async function listProjectLanguageTerms(
   projectId: number,
@@ -15,16 +20,11 @@ export default async function listProjectLanguageTerms(
     response.result.terms.reduce(
       (
         terms: any,
-        {
-          reference,
-          term,
-          translation: { content },
-        }: {
-          readonly reference: string
-          readonly term: string
-          readonly translation: { readonly content: string }
-        }
-      ) => ({ ...terms, [term]: content || reference }),
+        { term, translation: { content } }: InterfacePoeditorTerm
+      ) => ({
+        ...terms,
+        [term]: content,
+      }),
       {}
     )
   )

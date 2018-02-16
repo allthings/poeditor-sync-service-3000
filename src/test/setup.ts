@@ -7,7 +7,7 @@ process.env.POEDITOR_TOKEN = 'foobar==' // tslint:disable-line no-object-mutatio
 
 mockAWS.setSDKInstance(AWS)
 
-mockAWS.mock('S3', 'deleteObjects', (params: any, callback: any) =>
+mockAWS.mock('S3', 'deleteObjects', (_: any, callback: any) =>
   callback(null, { Item: { foo: 'bar' } })
 )
 
