@@ -2,6 +2,15 @@
 # yarn lockfile v1
 
 
+"@allthings/tslint-preset@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@allthings/tslint-preset/-/tslint-preset-1.0.0.tgz#40848c6e8d237ea1a20327356b592203fa564f13"
+  dependencies:
+    tslint "5.9.1"
+    tslint-config-prettier "1.7.0"
+    tslint-immutable "4.5.1"
+    tslint-react "3.4.0"
+
 "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0-beta.39"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.39.tgz#91c90bb65207fc5a55128cb54956ded39e850457"
@@ -5896,7 +5905,7 @@ tslib@^1.7.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.1.tgz#6946af2d1d651a7b1863b531d6e5afa41aa44eac"
 
-tslib@^1.8.0:
+tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
@@ -5907,6 +5916,12 @@ tslint-config-prettier@1.7.0:
 tslint-immutable@4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/tslint-immutable/-/tslint-immutable-4.5.1.tgz#85cf4366ae60acb341ebdd3e1ea8b670d6cf2a11"
+
+tslint-react@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/tslint-react/-/tslint-react-3.4.0.tgz#12ed3fc7063f3df988370206736b50acbce07e59"
+  dependencies:
+    tsutils "^2.13.1"
 
 tslint@5.9.1:
   version "5.9.1"
@@ -5930,6 +5945,12 @@ tsutils@^2.12.1:
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.13.0.tgz#0f52b6aabbc4216e72796b66db028c6cf173e144"
   dependencies:
     tslib "^1.7.1"
+
+tsutils@^2.13.1:
+  version "2.21.1"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.21.1.tgz#5b23c263233300ed7442b4217855cbc7547c296a"
+  dependencies:
+    tslib "^1.8.1"
 
 tty-browserify@0.0.0:
   version "0.0.0"
