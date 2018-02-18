@@ -18,7 +18,7 @@
     "deploy": "STAGE=staging scripts/deploy.sh",
     "dev": "scripts/dev.sh",
     "dev:offline": "serverless offline start",
-    "encrypt-string": "scripts/kms-encrypt.sh",
+    "kms-encrypt": "aws-vault exec allthings-deploy -- aws-kms-thingy encrypt",
     "invoke:local": "serverless invoke local --function",
     "lint": "yarn lint:tsc && yarn lint:tslint",
     "lint:tslint": "tslint -p tsconfig.json -t stylish",
@@ -45,7 +45,8 @@
   "homepage": "https://github.com/allthings/poeditor-sync-service-3000",
   "dependencies": {
     "alagarr": "1.0.0-22",
-    "aws-sdk": "2.188.0",
+    "aws-kms-thingy": "1.0.0-5",
+    "aws-sdk": "2.197.0",
     "aws-xray-sdk-core": "1.1.7",
     "got": "8.0.3",
     "source-map-support": "0.5.3"
@@ -99,7 +100,7 @@
     ]
   },
   "jest": {
-    "bail": true,
+    "bail": false,
     "collectCoverage": true,
     "mapCoverage": true,
     "roots": [
@@ -127,8 +128,7 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/src/test/",
-      "/src/utils/s3",
-      "/src/utils/kms"
+      "/src/utils/s3"
     ]
   }
 }

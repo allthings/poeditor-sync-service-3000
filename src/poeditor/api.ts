@@ -1,6 +1,6 @@
 import { ServerError } from 'alagarr'
+import { decrypt as kmsDecrypt } from 'aws-kms-thingy'
 import * as get from 'got'
-import kmsDecrypt from '../utils/kms'
 
 const POEDITOR_API_BASE_URL = 'https://api.poeditor.com/v2'
 
@@ -10,13 +10,13 @@ export default async function poeditorApiRequest(
   data: any = {},
   POEDITOR_TOKEN: string | undefined = process.env.POEDITOR_TOKEN
 ): Promise<any> {
-  const apiToken = await kmsDecrypt(POEDITOR_TOKEN || '')
-
-  if (!apiToken.length) {
+  if (!POEDITOR_TOKEN || !POEDITOR_TOKEN.length) {
     throw new ServerError('POEDITOR_TOKEN environment variable is not set.')
   }
 
   try {
+    const apiToken = await kmsDecrypt(POEDITOR_TOKEN)
+
     const response = await get(`${POEDITOR_API_BASE_URL}/${method}`, {
       body: { api_token: apiToken, ...data },
       form: true,
