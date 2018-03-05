@@ -61,8 +61,6 @@ export default handler(
       throw new ClientError(`Project name missing from request URL ${path}`)
     }
 
-    console.log('name', name) // tslint:disable-line
-
     /*
     2. Get POEditor projects which match application name from step #1
   */
@@ -72,8 +70,6 @@ export default handler(
     if (Object.keys(projects).length === 0) {
       throw new ClientError(`There is no POEditor project matching ${path}`)
     }
-
-    console.log('projects', projects) // tslint:disable-line
 
     /*
     3. Check if another synchronisation process is already running.
@@ -107,19 +103,39 @@ export default handler(
       )
     }
 
-    console.log('lockObjectKey', lockObjectKey) // tslint:disable-line
+    /*
+      Make sure that the lock file is cleaned up if we run out of
+      synchronisation time (max 30 seconds).
+      Unfortunately requires using a mutable variable as there's no other
+      sensible way to indicate a timeout has occurred (that i can think of,
+        and isn't a hack)
+    */
+    let hasTimedOut = false // tslint:disable-line
+    const timeoutInterval: NodeJS.Timer = setInterval(async () => {
+      if (Date.now() - (request.timestamp || 0) >= 25 * 1000) {
+        context.callbackWaitsForEmptyEventLoop = false // tslint:disable-line
+        hasTimedOut = true // tslint:disable-line
+
+        return (
+          !clearInterval(timeoutInterval) &&
+          (await s3RemoveObject(lockObjectKey)) &&
+          response.json(
+            {
+              error: 'SynchronisationTimeoutError',
+              message:
+                'Your request has run out of time, however the translation synchronisation process will continue in the background.',
+            },
+            408
+          )
+        )
+      }
+    }, 500)
 
     /*
     4. Get list of translation language codes for each project-variation
   */
     const listOfEachProjectsLanguageCodes = await Promise.all(
       projects.map(({ id }) => getProjectLanguageCodes(id))
-    )
-
-    // tslint:disable-next-line
-    console.log(
-      'listOfEachProjectsLanguageCodes',
-      listOfEachProjectsLanguageCodes
     )
 
     /*
@@ -135,8 +151,6 @@ export default handler(
       )
     )
 
-    console.log('termsForEachProjectLanguage', termsForEachProjectLanguage) // tslint:disable-line
-
     /*
     6. Merge project defaults with variation (check for empty strings, too)
   */
@@ -145,8 +159,6 @@ export default handler(
       listOfEachProjectsLanguageCodes,
       termsForEachProjectLanguage
     )
-
-    console.log('translations, missing', translations, missing) // tslint:disable-line
 
     /*
     7. Save dat shiiiit to s3.
@@ -170,25 +182,25 @@ export default handler(
       )
     )
 
-    console.log('s3 objects saved') // tslint:disable-line
-
     /*
     8. Delete the cheap-lock
   */
     // tslint:disable-next-line:no-expression-statement
     await s3RemoveObject(lockObjectKey)
 
-    console.log('lock removed') // tslint:disable-line
-
     /*
     We're done!
   */
-    return response.json({
-      message: 'Translation synchronisation completed.',
-      missing,
-      path,
-      projects,
-    })
+    return (
+      !hasTimedOut &&
+      !clearInterval(timeoutInterval) &&
+      response.json({
+        message: 'Translation synchronisation completed.',
+        missing,
+        path,
+        projects,
+      })
+    )
   },
   handlerConfig
 )
