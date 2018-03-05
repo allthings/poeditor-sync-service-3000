@@ -75,8 +75,6 @@
     "ts-jest": "22.0.4",
     "ts-loader": "3.5.0",
     "tslint": "5.9.1",
-    "tslint-config-prettier": "1.8.0",
-    "tslint-immutable": "4.5.1",
     "typescript": "2.7.2",
     "webpack": "3.11.0"
   },
