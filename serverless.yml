@@ -37,7 +37,7 @@ functions:
   poets:
     description: POEditor translation synchronisation service
     memorySize: 1024
-    timeout: 120
+    timeout: 30
     handler: src/handler.default
     events:
       - http:
