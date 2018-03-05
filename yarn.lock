@@ -149,12 +149,12 @@ ajv@^6.1.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-alagarr@1.0.0-22:
-  version "1.0.0-22"
-  resolved "https://registry.yarnpkg.com/alagarr/-/alagarr-1.0.0-22.tgz#826697b9db139a078e189213a539829d0721932f"
+alagarr@1.0.0-23:
+  version "1.0.0-23"
+  resolved "https://registry.yarnpkg.com/alagarr/-/alagarr-1.0.0-23.tgz#108ded507e1e1259129241d3e3565e0c23601810"
   dependencies:
     accepts "1.3.4"
-    compressible "2.0.12"
+    compressible "2.0.13"
     cookie "0.3.1"
     etag "1.8.1"
 
@@ -442,9 +442,9 @@ atob@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.0.3.tgz#19c7a760473774468f20b2d2d03372ad7d4cbf5d"
 
-aws-kms-thingy@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-1.0.2.tgz#236cc35c0a2df573c04551c8484620ca8ae01ae8"
+aws-kms-thingy@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-1.0.3.tgz#12f7405648bdf1ca4084883ea492b0f50ba2a77d"
   dependencies:
     aws-sdk "2.197.0"
 
@@ -459,6 +459,20 @@ aws-sdk-mock@1.7.0:
 aws-sdk@2.197.0:
   version "2.197.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.197.0.tgz#986e3749f4d1944c6253d7824aa8035efb1db0e4"
+  dependencies:
+    buffer "4.9.1"
+    events "^1.1.1"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.17"
+    xmlbuilder "4.2.1"
+
+aws-sdk@2.205.0:
+  version "2.205.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.205.0.tgz#1a93730253e2be027a4bd3af9248cbda0573de80"
   dependencies:
     buffer "4.9.1"
     events "^1.1.1"
@@ -1196,11 +1210,11 @@ compress-commons@^1.2.0:
     normalize-path "^2.0.0"
     readable-stream "^2.0.0"
 
-compressible@2.0.12:
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.12.tgz#c59a5c99db76767e9876500e271ef63b3493bd66"
+compressible@2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.13.tgz#0d1020ab924b2fdb4d6279875c7d6daba6baa7a9"
   dependencies:
-    mime-db ">= 1.30.0 < 2"
+    mime-db ">= 1.33.0 < 2"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -2345,9 +2359,9 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-got@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/got/-/got-8.1.0.tgz#353a8cdf85ef8f958a38de7729610c43c179141b"
+got@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/got/-/got-8.2.0.tgz#0d11a071d05046348a2f5c0a5fa047fb687fdfc6"
   dependencies:
     "@sindresorhus/is" "^0.7.0"
     cacheable-request "^2.1.1"
@@ -4150,9 +4164,13 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-mime-db@1.x.x, "mime-db@>= 1.30.0 < 2":
+mime-db@1.x.x:
   version "1.32.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.32.0.tgz#485b3848b01a3cda5f968b4882c0771e58e09414"
+
+"mime-db@>= 1.33.0 < 2":
+  version "1.33.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.33.0.tgz#a3492050a5cb9b63450541e39d9788d2272783db"
 
 mime-db@~1.30.0:
   version "1.30.0"
