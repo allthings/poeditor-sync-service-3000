@@ -48,7 +48,7 @@
     "aws-kms-thingy": "1.0.3",
     "aws-sdk": "2.197.0",
     "aws-xray-sdk-core": "1.2.0",
-    "got": "8.2.0",
+    "got": "8.3.0",
     "source-map-support": "0.5.4"
   },
   "devDependencies": {
