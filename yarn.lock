@@ -5457,9 +5457,9 @@ serverless-webpack@4.4.0:
     semver "^5.4.1"
     ts-node "^3.2.0"
 
-serverless@1.26.0:
-  version "1.26.0"
-  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.26.0.tgz#cd46345a25d9fdd6c7a9c1da95251de39053ddae"
+serverless@1.26.1:
+  version "1.26.1"
+  resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.26.1.tgz#20037b28ce36ab381d36929081f36b249d126542"
   dependencies:
     "@serverless/fdk" "^0.5.1"
     apollo-client "^1.9.2"

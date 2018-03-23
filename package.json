@@ -68,7 +68,7 @@
     "nsp": "3.2.1",
     "prettier": "1.11.1",
     "rimraf": "2.6.2",
-    "serverless": "1.26.0",
+    "serverless": "1.26.1",
     "serverless-offline": "3.18.0",
     "serverless-webpack": "4.4.0",
     "smid": "0.1.1",
