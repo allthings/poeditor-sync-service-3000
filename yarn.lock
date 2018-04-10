@@ -451,11 +451,9 @@ atob@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.0.3.tgz#19c7a760473774468f20b2d2d03372ad7d4cbf5d"
 
-aws-kms-thingy@1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-1.0.7.tgz#87146d50ec1c56cb635672a3e5c882890c3d2240"
-  dependencies:
-    aws-sdk "2.223.1"
+aws-kms-thingy@1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-1.0.8.tgz#f47322974d8729636a762f312c3869296054a5f5"
 
 aws-sdk-mock@1.7.0:
   version "1.7.0"
