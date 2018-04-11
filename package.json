@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/allthings/poeditor-sync-service-3000",
   "dependencies": {
-    "alagarr": "1.0.0-24",
+    "alagarr": "1.0.0-26",
     "aws-kms-thingy": "1.0.8",
     "aws-sdk": "2.224.1",
     "aws-xray-sdk-core": "1.2.0",
