@@ -46,7 +46,7 @@
   "dependencies": {
     "alagarr": "1.0.0-26",
     "aws-kms-thingy": "1.0.8",
-    "aws-sdk": "2.233.1",
+    "aws-sdk": "2.234.1",
     "aws-xray-sdk-core": "1.2.0",
     "got": "8.3.1",
     "source-map-support": "0.5.5"
