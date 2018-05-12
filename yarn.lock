@@ -5367,9 +5367,9 @@ serialize-error@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
 
-serverless-offline@3.21.0:
-  version "3.21.0"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-3.21.0.tgz#0e8e73996bc1ae4b3cf2985e2d9422c716bb1a3e"
+serverless-offline@3.21.1:
+  version "3.21.1"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-3.21.1.tgz#cdf3f8e3606771295cc3fa171fc53fd2cb97debc"
   dependencies:
     babel-register "^6.18.0"
     boom "^4.2.0"
