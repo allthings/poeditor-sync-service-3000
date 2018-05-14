@@ -457,9 +457,9 @@ aws-sdk-mock@2.0.0:
     sinon "^4.5.0"
     traverse "^0.6.6"
 
-aws-sdk@2.238.1:
-  version "2.238.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.238.1.tgz#a35fdec122ed915da490840e8828336da5be4e7f"
+aws-sdk@2.239.1:
+  version "2.239.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.239.1.tgz#299a3e611e5c47b39230bd1f51e2d25d1fbdb345"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -470,7 +470,6 @@ aws-sdk@2.238.1:
     url "0.10.3"
     uuid "3.1.0"
     xml2js "0.4.17"
-    xmlbuilder "4.2.1"
 
 aws-sdk@^2.228.0:
   version "2.230.1"
