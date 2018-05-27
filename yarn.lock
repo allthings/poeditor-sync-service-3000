@@ -74,9 +74,9 @@
   version "9.6.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.18.tgz#092e13ef64c47e986802c9c45a61c1454813b31d"
 
-"@types/source-map-support@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@types/source-map-support/-/source-map-support-0.4.0.tgz#a62a1866614af68c888173c001481f242aaf148b"
+"@types/source-map-support@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@types/source-map-support/-/source-map-support-0.4.1.tgz#ad77158e8c6695a16629ef82b9fb9dfe7c610ac0"
   dependencies:
     "@types/node" "*"
 
