@@ -66,7 +66,7 @@
     "json-loader": "0.5.7",
     "lint-staged": "7.2.0",
     "nsp": "3.2.1",
-    "prettier": "1.13.6",
+    "prettier": "1.13.7",
     "rimraf": "2.6.2",
     "serverless": "1.27.3",
     "serverless-offline": "3.25.4",
