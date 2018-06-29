@@ -5555,9 +5555,9 @@ serialize-error@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
 
-serverless-offline@3.25.4:
-  version "3.25.4"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-3.25.4.tgz#a5d4d3ece803ee36f3e7cffec9019731314d351c"
+serverless-offline@3.25.5:
+  version "3.25.5"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-3.25.5.tgz#59cb135a917910f4701acc4a60fe3ae487346587"
   dependencies:
     babel-register "^6.18.0"
     boom "^4.2.0"
@@ -5567,7 +5567,7 @@ serverless-offline@3.25.4:
     js-string-escape "^1.0.1"
     jsonpath-plus "^0.16.0"
     jsonwebtoken "^8.2.1"
-    lodash "^4.17.4"
+    lodash "^4.17.10"
     uuid "^3.2.1"
     velocityjs "^0.9.3"
 
