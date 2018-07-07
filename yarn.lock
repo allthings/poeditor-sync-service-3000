@@ -71,9 +71,9 @@
   version "8.10.1"
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.1.tgz#424888a9ee89f6b5fc6dc23f31b00a715483dcaf"
 
-"@types/got@8.3.1":
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/@types/got/-/got-8.3.1.tgz#823ded0ce469895be3d01553fec31ff86339ff9f"
+"@types/got@8.3.2":
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/@types/got/-/got-8.3.2.tgz#38cd82d25bf62f2162f2c29a988456ffde089e35"
   dependencies:
     "@types/node" "*"
 
