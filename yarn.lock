@@ -456,9 +456,9 @@ atomic-batcher@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/atomic-batcher/-/atomic-batcher-1.0.2.tgz#d16901d10ccec59516c197b9ccd8930689b813b4"
 
-aws-kms-thingy@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-1.0.8.tgz#f47322974d8729636a762f312c3869296054a5f5"
+aws-kms-thingy@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-2.0.0.tgz#508750a40113b8e4185629c84801c994d5f71eed"
 
 aws-sdk-mock@4.0.0:
   version "4.0.0"
