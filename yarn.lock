@@ -468,9 +468,9 @@ aws-sdk-mock@4.0.0:
     sinon "^6.0.0"
     traverse "^0.6.6"
 
-aws-sdk@2.279.1, aws-sdk@^2.260.1:
-  version "2.279.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.279.1.tgz#3a4fd4167932e4361dbdcfcb174ce4840ffcbf20"
+aws-sdk@2.280.1:
+  version "2.280.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.280.1.tgz#73a152ef68456c66d303b0938cb64479ee02de5b"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -496,6 +496,20 @@ aws-sdk@^2.228.0:
     uuid "3.1.0"
     xml2js "0.4.17"
     xmlbuilder "4.2.1"
+
+aws-sdk@^2.260.1:
+  version "2.279.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.279.1.tgz#3a4fd4167932e4361dbdcfcb174ce4840ffcbf20"
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.19"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
