@@ -62,7 +62,7 @@
     "fork-ts-checker-webpack-plugin": "0.4.3",
     "happypack": "5.0.0",
     "husky": "0.14.3",
-    "jest": "23.4.1",
+    "jest": "23.5.0",
     "json-loader": "0.5.7",
     "lint-staged": "7.2.0",
     "nsp": "3.2.1",
