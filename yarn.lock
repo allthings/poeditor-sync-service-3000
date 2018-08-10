@@ -449,9 +449,9 @@ aws-kms-thingy@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-2.0.0.tgz#508750a40113b8e4185629c84801c994d5f71eed"
 
-aws-sdk-mock@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk-mock/-/aws-sdk-mock-4.0.0.tgz#759d938f5df5eda4ef90b0535059a61b2e57f4dd"
+aws-sdk-mock@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk-mock/-/aws-sdk-mock-4.1.0.tgz#e156de7010640f0a399072c852146fbfea9ad4aa"
   dependencies:
     aws-sdk "^2.260.1"
     sinon "^6.0.0"
