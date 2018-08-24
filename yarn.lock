@@ -80,9 +80,9 @@
   version "9.4.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
 
-"@types/node@9.6.28":
-  version "9.6.28"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.28.tgz#198927ce0786106ec2a7c8652d46d5f8b87bfc5f"
+"@types/node@9.6.29":
+  version "9.6.29"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.29.tgz#9b3c5b288c77fbd2ab5684d36e3528cb9ee5429f"
 
 "@types/source-map-support@0.4.1":
   version "0.4.1"
