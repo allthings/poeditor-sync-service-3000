@@ -650,10 +650,10 @@ aws-kms-thingy@2.0.0:
   resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-2.0.0.tgz#508750a40113b8e4185629c84801c994d5f71eed"
   integrity sha512-CDPO49eLWdxd6SSM1WfprPTuWsAx2Zk/b/gF6AhWAEF4pt53OPNLo7Ua6NfOVfhcZJzxFhm0ny7tFDBl7ekGsg==
 
-aws-sdk-mock@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk-mock/-/aws-sdk-mock-4.1.0.tgz#e156de7010640f0a399072c852146fbfea9ad4aa"
-  integrity sha512-JZoLKMzgYXzDdpyKdgw+4JG9nKFd/oab8VDTnwd6iY/mHjmuQUx7kFlOMZ5pNdMK/jcY02Ks7oECHC+ZnwLwqw==
+aws-sdk-mock@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk-mock/-/aws-sdk-mock-4.2.0.tgz#6f2b426dce47837fb2d825f5b6c1d1ba77a52a92"
+  integrity sha512-pAsMm8AoYRUkLlbFWow4V5DG0arYLHUNyRpxUszBeJsW5z/EKpkNnAXJruDt3uDRy4gQkSanPSIia3y5+ibLsA==
   dependencies:
     aws-sdk "^2.260.1"
     sinon "^6.0.0"
