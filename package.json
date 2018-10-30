@@ -54,7 +54,7 @@
   "devDependencies": {
     "@allthings/tslint-preset": "1.0.1",
     "@types/aws-lambda": "8.10.1",
-    "@types/got": "8.3.4",
+    "@types/got": "8.3.5",
     "@types/jest": "23.3.8",
     "@types/node": "9.6.35",
     "@types/source-map-support": "0.4.1",

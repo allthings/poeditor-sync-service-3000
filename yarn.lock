@@ -212,10 +212,10 @@
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.1.tgz#424888a9ee89f6b5fc6dc23f31b00a715483dcaf"
   integrity sha512-a9qWnTgl12AIQVUyZ6A9oHt0gkhPhuHLtpL6zkfUB/06KLWcDFJKT4ldAouIWjoM36t2cEWqI7HY9ty06cNBtQ==
 
-"@types/got@8.3.4":
-  version "8.3.4"
-  resolved "https://registry.yarnpkg.com/@types/got/-/got-8.3.4.tgz#c6acca7252cdc9f7ae58070d13a45eb6ef9f88e7"
-  integrity sha512-0AbIQzpqQafYPFg26nwg5PfNgPLYwHeTP6z5F1u+5oypLIdpx34o5r8wYTTj3X3YYF2yPHtZPO/KYwlI8Nu/hQ==
+"@types/got@8.3.5":
+  version "8.3.5"
+  resolved "https://registry.yarnpkg.com/@types/got/-/got-8.3.5.tgz#d8a0e8fa7598681b332a4d27779b022b2e55fb7f"
+  integrity sha512-AaXSrIF99SjjtPVNmCmYb388HML+PKEJb/xmj4SbL2ZO0hHuETZZzyDIKfOqaEoAHZEuX4sC+FRFrHYJoIby6A==
   dependencies:
     "@types/node" "*"
 
