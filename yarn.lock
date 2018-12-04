@@ -330,10 +330,10 @@ ajv@^6.1.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-alagarr@1.0.0-28:
-  version "1.0.0-28"
-  resolved "https://registry.yarnpkg.com/alagarr/-/alagarr-1.0.0-28.tgz#1bbea3336a9ef31316e5f3c8c6c4307fe3702152"
-  integrity sha512-Rzic4Li6abY8WjIERg2go4NfZPDNDk+ylT3bWiUKKqsjr613+I6SvyLB39s4M+xLVzrHf0uEdwrjN7UyCtZMlw==
+alagarr@1.0.0-30:
+  version "1.0.0-30"
+  resolved "https://registry.yarnpkg.com/alagarr/-/alagarr-1.0.0-30.tgz#c1a4a7b42f7df5fbc8969b3e353784a645bc2ef9"
+  integrity sha512-3XVXwoC5VIJxED5wMbAZ74XgCGu7Ax9VDZm6yVKa7Z0pJHOTPUj21X4QqTqLYg34HY7HwkzQH4RLyiDToCq/3w==
 
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
