@@ -1,4 +1,4 @@
-service: 
+service:
   name: ${self:custom.package.name}
   awsKmsKeyArn: ${env:AWS_KMS_KEY_ARN, self:custom.package.config.awsKmsKeyArn} # use a custom kms key
 
@@ -21,8 +21,8 @@ provider:
   region: ${self:custom.package.config.awsRegion}
   role: arn:aws:iam::${self:custom.awsAccountId}:role/aws-lambda-localization-sync-role
   deploymentBucket: allthings-lambda-deployments-${self:provider.region}
-  versionFunctions: ${self:custom.versioning.${self:provider.stage}, self:custom.versioning.default} 
-  environment: 
+  versionFunctions: ${self:custom.versioning.${self:provider.stage}, self:custom.versioning.default}
+  environment:
     STAGE: ${self:provider.stage}
     NODE_ENV: ${env:NODE_ENV, self:custom.defaultEnvironment}
     AWS_S3_BUCKET: allthings-static
@@ -52,8 +52,8 @@ resources:
     ApiGatewayRestApi:
       Properties:
         BinaryMediaTypes:
-          - "*/*"
-  
+          - '*/*'
+
     # Enable X-Ray tracing on Lambda functions
     PoetsLambdaFunction:
       Properties:
