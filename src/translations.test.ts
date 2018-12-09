@@ -19,8 +19,15 @@ describe('The translations', () => {
           normative: 'formal',
           variation: 'residential',
         },
+        {
+          id: 3,
+          isDefault: false,
+          name: 'app',
+          normative: 'formal',
+          variation: 'commercial',
+        },
       ],
-      [['en', 'de', 'fr'], ['en', 'de', 'fr', 'pt']],
+      [['en', 'de', 'fr'], ['en', 'de', 'fr', 'pt'], ['en', 'de', 'it', 'pt']],
       [
         [
           { 'foo.bar': 'default-variation en' },
@@ -31,6 +38,12 @@ describe('The translations', () => {
           { 'foo.bar': 'variation, fallback en' },
           { 'foo.bar': '' },
           { 'foo.bar': '' },
+          { 'foo.bar': '' },
+        ],
+        [
+          { 'foo.bar': 'variation, fallback en' },
+          { 'foo.bar': '' },
+          { 'foo.bar': 'variation, it' },
           { 'foo.bar': '' },
         ],
       ]
@@ -48,6 +61,23 @@ describe('The translations', () => {
       { 'foo.bar': 'variation, fallback en' },
     ])
 
+    expect(translations[2]).toEqual([
+      { 'foo.bar': 'variation, fallback en' },
+      { 'foo.bar': 'default-variation de' },
+      { 'foo.bar': 'variation, it' },
+      { 'foo.bar': 'variation, fallback en' },
+    ])
+
+    expect(missing[2]).toEqual({
+      id: 3,
+      isDefault: false,
+      name: 'app',
+      normative: 'formal',
+      variation: 'commercial',
+
+      de: ['foo.bar'],
+      pt: ['foo.bar'],
+    })
     expect(missing[1]).toEqual({
       id: 2,
       isDefault: false,
