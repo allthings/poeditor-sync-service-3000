@@ -30,21 +30,21 @@ describe('The translations', () => {
       [['en', 'de', 'fr'], ['en', 'de', 'fr', 'pt'], ['en', 'de', 'it', 'pt']],
       [
         [
-          { 'foo.bar': 'default-variation en' },
-          { 'foo.bar': 'default-variation de' },
-          { 'foo.bar': '' },
+          { 'foo.bar': { content: 'default-variation en' } },
+          { 'foo.bar': { content: 'default-variation de' } },
+          { 'foo.bar': { content: '' } },
         ],
         [
-          { 'foo.bar': 'variation, fallback en' },
-          { 'foo.bar': '' },
-          { 'foo.bar': '' },
-          { 'foo.bar': '' },
+          { 'foo.bar': { content: 'variation, fallback en' } },
+          { 'foo.bar': { content: '' } },
+          { 'foo.bar': { content: '' } },
+          { 'foo.bar': { content: '' } },
         ],
         [
-          { 'foo.bar': 'variation, fallback en' },
-          { 'foo.bar': '' },
-          { 'foo.bar': 'variation, it' },
-          { 'foo.bar': '' },
+          { 'foo.bar': { content: 'variation, fallback en' } },
+          { 'foo.bar': { content: '' } },
+          { 'foo.bar': { content: 'variation, it' } },
+          { 'foo.bar': { content: '' } },
         ],
       ]
     )
@@ -114,9 +114,9 @@ describe('The translations', () => {
       [['en', 'de', 'fr']],
       [
         [
-          { 'foo.bar': 'variation, fallback en' },
-          { 'foo.bar': '' },
-          { 'foo.bar': '' },
+          { 'foo.bar': { content: 'variation, fallback en' } },
+          { 'foo.bar': { content: '' } },
+          { 'foo.bar': { content: '' } },
         ],
       ]
     )
@@ -149,11 +149,11 @@ describe('The translations', () => {
       [['en', 'de', 'fr'], ['en']],
       [
         [
-          { 'foo.bar': 'variation, fallback en' },
-          { 'foo.bar': '' },
-          { 'foo.bar': '' },
+          { 'foo.bar': { content: 'variation, fallback en' } },
+          { 'foo.bar': { content: '' } },
+          { 'foo.bar': { content: '' } },
         ],
-        [{ 'foo.bar': 'english' }],
+        [{ 'foo.bar': { content: 'english' } }],
       ]
     )
 
@@ -181,12 +181,39 @@ describe('The translations', () => {
         },
       ],
       [['en', '', 'fr'], ['en']],
-      [[], [{ 'foo.bar': '' }]]
+      [[], [{ 'foo.bar': { content: '' } }]]
     )
 
     expect(translations.length).toBe(2)
     expect(translations[0].length).toBe(0)
     expect(missing.length).toBe(1)
+  })
+
+  it('should use reference if default project does not have fallback language translated', async () => {
+    const { translations } = resolveTranslationsGivenTermsAndDefaults(
+      [
+        {
+          id: 1,
+          isDefault: true,
+          name: 'app',
+          normative: 'informal',
+          variation: 'residential',
+        },
+        {
+          id: 2,
+          isDefault: false,
+          name: 'app',
+          normative: 'formal',
+          variation: 'commercial',
+        },
+      ],
+      [['de'], ['en']],
+      [
+        [{ 'foo.bar': { content: 'default-variation', reference: '' } }],
+        [{ 'foo.bar': { content: '', reference: 'variation (reference)' } }],
+      ]
+    )
+    expect(translations[1]).toEqual([{ 'foo.bar': 'variation (reference)' }])
   })
 
   it('should be able to handle scenario where default is missing terms present in a variation', async () => {
@@ -208,7 +235,7 @@ describe('The translations', () => {
         },
       ],
       [['en', '', 'fr'], ['en']],
-      [[{}], [{ 'foo.bar': '' }]]
+      [[{}], [{ 'foo.bar': { content: '' } }]]
     )
 
     expect(translations.length).toBe(2)

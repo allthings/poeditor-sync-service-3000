@@ -8,11 +8,20 @@ import listProjectLanguageTerms from './terms'
 */
 
 describe('The Poeditor Terms wrapper', () => {
-  it('should return an object of term-keys and their translation as key-value', async () => {
+  it('should return an object of term-keys and their content and reference translation object key-value', async () => {
     expect(await listProjectLanguageTerms(1234, 'de')).toEqual({
-      'contracts.unit-type.caretaker-room': 'Hauswartraum',
-      'contracts.unit-type.carport': 'Einstellplatz',
-      'test.missing.translation': 'Test Missing Translation (reference)',
+      'contracts.unit-type.caretaker-room': {
+        content: 'Hauswartraum',
+        reference: 'Caretaker Room',
+      },
+      'contracts.unit-type.carport': {
+        content: 'Einstellplatz',
+        reference: 'Carport',
+      },
+      'test.missing.translation': {
+        content: '',
+        reference: 'Test Missing Translation (reference)',
+      },
     })
   })
 })
