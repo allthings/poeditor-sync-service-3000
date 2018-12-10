@@ -49,7 +49,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
               ]
 
               // the term's translation content is OK (non-empty)
-              if (translatedContent && translatedContent.length) {
+              if (translatedContent.length) {
                 return {
                   missingTerms,
                   processedTerms: {
