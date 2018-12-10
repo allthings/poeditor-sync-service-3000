@@ -16,7 +16,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: ${env:STAGE, self:custom.defaultStage}
   region: ${self:custom.package.config.awsRegion}
   role: arn:aws:iam::${self:custom.awsAccountId}:role/aws-lambda-localization-sync-role
