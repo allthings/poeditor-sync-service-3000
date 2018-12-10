@@ -209,7 +209,14 @@ describe('The translations', () => {
       ],
       [['de'], ['en']],
       [
-        [{ 'foo.bar': { content: 'default-variation', reference: '' } }],
+        [
+          {
+            'foo.bar': {
+              content: 'default-variation',
+              reference: 'default-variont (reference)',
+            },
+          },
+        ],
         [{ 'foo.bar': { content: '', reference: 'variation (reference)' } }],
       ]
     )
