@@ -92,11 +92,11 @@ export default handler(
     }
 
     if (
-      !await s3PutObject(lockObjectKey, lockData, {
+      !(await s3PutObject(lockObjectKey, lockData, {
         Expires: new Date(
           Date.now() + context.getRemainingTimeInMillis()
         ).toISOString(),
-      })
+      }))
     ) {
       throw new ClientError(
         `Unable to gain a lock for "${name}" synchronisation process.`
