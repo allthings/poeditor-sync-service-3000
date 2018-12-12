@@ -14,11 +14,13 @@ module.exports = {
         loader: 'happypack/loader?id=ts',
         test: /\.tsx?$/,
       },
-      { test: /\.json$/, loader: 'json-loader' },
     ],
   },
   node: {
     __dirname: true,
+  },
+  optimization: {
+    minimize: false,
   },
   output: {
     filename: '[name].js',

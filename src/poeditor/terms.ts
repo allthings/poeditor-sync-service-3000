@@ -24,7 +24,7 @@ export default async function listProjectLanguageTerms(
         { reference, term, translation: { content } }: InterfacePoeditorTerm
       ) => ({
         ...terms,
-        [term]: content || reference,
+        [term]: { content, reference },
       }),
       {}
     )

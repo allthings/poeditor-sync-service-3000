@@ -13,6 +13,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
   terms: ReadonlyArray<ReadonlyArray<any>>
 ): InterfaceResolvedTranslations {
   // 1. find default projects
+
   const defaultProjectIndexes: {
     readonly [key: string]: number
   } = projects.reduce(
@@ -44,15 +45,17 @@ export default function resolveTranslationsGivenTermsAndDefaults(
             // This starts to get a bit nested/crazy and should probably be refactored
             // into it's own function for readability/clarity
             ({ missingTerms, processedTerms }: any, term) => {
-              const termTranslation = languageTerms[term]
+              const { content: translatedContent, reference } = languageTerms[
+                term
+              ]
 
-              // the term's translation is OK (non-empty)
-              if (termTranslation.length) {
+              // the term's translation content is OK (non-empty)
+              if (translatedContent.length) {
                 return {
                   missingTerms,
                   processedTerms: {
                     ...processedTerms,
-                    [term]: termTranslation,
+                    [term]: translatedContent,
                   },
                 }
               }
@@ -62,14 +65,15 @@ export default function resolveTranslationsGivenTermsAndDefaults(
                 const defaultProjectMatchingLanguageIndex = languageCodes[
                   defaultProjectIndex
                 ].indexOf(thisLanguageCode)
-                const defaultTermTranslation =
-                  defaultProjectMatchingLanguageIndex >= 0 &&
+                const {
+                  content: defaultTermTranslation,
+                } = (defaultProjectMatchingLanguageIndex >= 0 &&
                   terms[defaultProjectIndex][
                     defaultProjectMatchingLanguageIndex
                   ] &&
                   terms[defaultProjectIndex][
                     defaultProjectMatchingLanguageIndex
-                  ][term]
+                  ][term]) || { content: '' }
 
                 if (defaultTermTranslation && defaultTermTranslation.length) {
                   return {
@@ -87,7 +91,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
               const fallbackProjectMatchingLanguageIndex = languageCodes[
                 projectIndex
               ].indexOf(SOURCE_LANGUAGE)
-              const fallbackTermTranslation =
+              const { content: fallbackTermTranslation } =
                 fallbackProjectMatchingLanguageIndex >= 0 &&
                 terms[projectIndex][fallbackProjectMatchingLanguageIndex][term]
 
@@ -97,6 +101,16 @@ export default function resolveTranslationsGivenTermsAndDefaults(
                   processedTerms: {
                     ...processedTerms,
                     [term]: fallbackTermTranslation,
+                  },
+                }
+              }
+
+              if (reference && reference.length) {
+                return {
+                  missingTerms,
+                  processedTerms: {
+                    ...processedTerms,
+                    [term]: reference,
                   },
                 }
               }
@@ -117,9 +131,9 @@ export default function resolveTranslationsGivenTermsAndDefaults(
           return {
             missing: {
               ...missingProjectTerms,
-              ...reducedTermsMissing && reducedTermsMissing.length
+              ...(reducedTermsMissing && reducedTermsMissing.length
                 ? { [thisLanguageCode]: reducedTermsMissing }
-                : {},
+                : {}),
             },
             translatedProjectLanguages: [
               ...translatedProjectLanguages,
@@ -130,6 +144,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
         // this is the .reduce()'s initial value
         { missing: {}, translatedProjectLanguages: [] }
       )
+
       return {
         missing: [
           ...missing,
