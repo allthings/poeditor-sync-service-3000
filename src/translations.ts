@@ -13,6 +13,7 @@ export default function resolveTranslationsGivenTermsAndDefaults(
   terms: ReadonlyArray<ReadonlyArray<any>>
 ): InterfaceResolvedTranslations {
   // 1. find default projects
+
   const defaultProjectIndexes: {
     readonly [key: string]: number
   } = projects.reduce(
