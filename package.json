@@ -1,6 +1,6 @@
 {
   "name": "poeditor-sync-service-3000",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
   "main": "src/handler.js",
   "config": {
@@ -26,7 +26,7 @@
     "precommit": "lint-staged",
     "pretest": "npm run clean",
     "prettier": "prettier --write",
-    "preversion": "yarn check --integrity && yarn security-check && yarn lint && yarn test",
+    "preversion": "yarn check --integrity && yarn lint && yarn test",
     "postversion": "git push --tags origin HEAD && scripts/deploy.sh",
     "security-check": "nsp check",
     "test": "jest",
