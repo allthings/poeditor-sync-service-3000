@@ -24,9 +24,6 @@ log() {
   echo "${background}${bold}  --- ${white}${1} ---  ${uncolor}${normal}"
 }
 
-# Check node_modules integrity
-yarn check
-
 # Iterate over the dependency requirements:
 while IFS= read -r REQUIREMENT; do
   # Skip empty lines and lines starting with a hash (#):
