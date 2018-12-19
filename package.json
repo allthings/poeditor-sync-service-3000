@@ -1,6 +1,6 @@
 {
   "name": "poeditor-sync-service-3000",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "AWS Lambda/API Gateway service to sync project translations from the POEditor API and stick them into AWS S3.",
   "main": "src/handler.js",
   "config": {
