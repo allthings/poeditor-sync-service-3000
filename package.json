@@ -55,7 +55,7 @@
     "@allthings/tslint-preset": "1.0.1",
     "@types/aws-lambda": "8.10.1",
     "@types/got": "8.3.5",
-    "@types/jest": "23.3.10",
+    "@types/jest": "23.3.11",
     "@types/node": "9.6.41",
     "@types/source-map-support": "0.4.1",
     "aws-sdk-mock": "4.3.0",
