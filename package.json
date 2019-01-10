@@ -67,7 +67,7 @@
     "lint-staged": "7.3.0",
     "prettier": "1.15.3",
     "rimraf": "2.6.3",
-    "serverless": "1.35.1",
+    "serverless": "1.36.0",
     "serverless-offline": "3.32.1",
     "serverless-webpack": "5.2.0",
     "smid": "0.1.1",
