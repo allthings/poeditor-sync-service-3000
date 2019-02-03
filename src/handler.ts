@@ -51,10 +51,16 @@ export default handler(
   ) => {
     const { path } = request
 
+    // tslint:disable-next-line
+    console.log({ response, request, context })
+
     /*
     1. from request path, figure out which app & stage we should process.
   */
     const { name, ...projectQuery } = getProjectMetaFromPath(path)
+
+    // tslint:disable-next-line
+    console.log({ name, ...projectQuery })
 
     // Check that project name was included in request path
     if (!name) {
@@ -65,6 +71,9 @@ export default handler(
     2. Get POEditor projects which match application name from step #1
   */
     const projects = await getPoeditorProjects({ name, ...projectQuery })
+
+    // tslint:disable-next-line
+    console.log({ projects })
 
     // Check that the variation exists
     if (Object.keys(projects).length === 0) {
@@ -115,6 +124,8 @@ export default handler(
       if (Date.now() - (request.timestamp || 0) >= 25 * 1000) {
         context.callbackWaitsForEmptyEventLoop = false // tslint:disable-line
         hasTimedOut = true // tslint:disable-line
+        // tslint:disable-next-line
+        console.log('in here')
 
         return (
           !clearInterval(timeoutInterval) &&
@@ -138,6 +149,9 @@ export default handler(
       projects.map(({ id }) => getProjectLanguageCodes(id))
     )
 
+    // tslint:disable-next-line
+    console.log({ listOfEachProjectsLanguageCodes })
+
     /*
     5. Get all translations for each language, for each project-variations
   */
@@ -150,6 +164,8 @@ export default handler(
         )
       )
     )
+    // tslint:disable-next-line
+    console.log({ termsForEachProjectLanguage })
 
     /*
     6. Merge project defaults with variation (check for empty strings, too)
@@ -159,6 +175,8 @@ export default handler(
       listOfEachProjectsLanguageCodes,
       termsForEachProjectLanguage
     )
+    // tslint:disable-next-line
+    console.log({ translations, missing })
 
     /*
     7. Save dat shiiiit to s3.
@@ -181,12 +199,16 @@ export default handler(
           )
       )
     )
+    // tslint:disable-next-line
+    console.log('map [roject done')
 
     /*
     8. Delete the cheap-lock
   */
     // tslint:disable-next-line:no-expression-statement
     await s3RemoveObject(lockObjectKey)
+    // tslint:disable-next-line
+    console.log('done')
 
     /*
     We're done!
