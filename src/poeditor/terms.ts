@@ -16,9 +16,6 @@ export default async function listProjectLanguageTerms(
     language: languageCode,
   })
 
-  // tslint:disable-next-line
-  console.log('5.5', { projectId, languageCode })
-
   const reducedTerms =
     response.result &&
     response.result.terms.reduce(
@@ -31,9 +28,6 @@ export default async function listProjectLanguageTerms(
       }),
       {}
     )
-
-  // tslint:disable-next-line
-  console.log('5.6', { reducedTerms })
 
   return reducedTerms
 }
