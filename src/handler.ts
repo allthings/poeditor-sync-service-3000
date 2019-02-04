@@ -159,8 +159,8 @@ export default handler(
       missing,
     } = await resolveTranslationsGivenTermsAndDefaults(
       projects,
-      await listOfEachProjectsLanguageCodes,
-      await termsForEachProjectLanguage
+      listOfEachProjectsLanguageCodes,
+      termsForEachProjectLanguage
     )
 
     /*
