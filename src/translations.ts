@@ -22,9 +22,6 @@ export default function resolveTranslationsGivenTermsAndDefaults(
     {}
   )
 
-  // tslint:disable-next-line
-  console.log(' in resolve translation func', { defaultProjectIndexes })
-
   // 2. reduce the terms so that there are no empty translation values, if possible
   return terms.reduce(
     ({ translations, missing }: any, project, projectIndex) => {

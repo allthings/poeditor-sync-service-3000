@@ -138,9 +138,6 @@ export default handler(
       projects.map(({ id }) => getProjectLanguageCodes(id))
     )
 
-    // tslint:disable-next-line
-    console.log('5', { listOfEachProjectsLanguageCodes })
-
     /*
     5. Get all translations for each language, for each project-variations
   */
