@@ -52,7 +52,7 @@ export default handler(
     const { path } = request
 
     // tslint:disable-next-line
-    console.log({ response, request, context })
+    console.log('1', { response, request, context })
 
     /*
     1. from request path, figure out which app & stage we should process.
@@ -60,7 +60,7 @@ export default handler(
     const { name, ...projectQuery } = getProjectMetaFromPath(path)
 
     // tslint:disable-next-line
-    console.log({ name, ...projectQuery })
+    console.log('2', { name, ...projectQuery })
 
     // Check that project name was included in request path
     if (!name) {
@@ -73,7 +73,7 @@ export default handler(
     const projects = await getPoeditorProjects({ name, ...projectQuery })
 
     // tslint:disable-next-line
-    console.log({ projects })
+    console.log('3', { projects })
 
     // Check that the variation exists
     if (Object.keys(projects).length === 0) {
@@ -88,6 +88,8 @@ export default handler(
     const lockObjectKey = `${name}/${STAGE}/i18n/translation-sync.lock`
 
     if (await s3ObjectExists(lockObjectKey)) {
+      // tslint:disable-next-line
+      console.log('lock file exists')
       throw new ClientError(
         `Synchronisation process for "${name}" is already running.`
       )
@@ -107,6 +109,8 @@ export default handler(
         ).toISOString(),
       }))
     ) {
+      // tslint:disable-next-line
+      console.log('error')
       throw new ClientError(
         `Unable to gain a lock for "${name}" synchronisation process.`
       )
@@ -121,11 +125,13 @@ export default handler(
     */
     let hasTimedOut = false // tslint:disable-line
     const timeoutInterval: NodeJS.Timer = setInterval(async () => {
-      if (Date.now() - (request.timestamp || 0) >= 25 * 1000) {
+      // tslint:disable-next-line
+      console.log('now 60')
+      if (Date.now() - (request.timestamp || 0) >= 60 * 1000) {
         context.callbackWaitsForEmptyEventLoop = false // tslint:disable-line
         hasTimedOut = true // tslint:disable-line
         // tslint:disable-next-line
-        console.log('in here')
+        console.log('4 in here')
 
         return (
           !clearInterval(timeoutInterval) &&
@@ -150,33 +156,44 @@ export default handler(
     )
 
     // tslint:disable-next-line
-    console.log({ listOfEachProjectsLanguageCodes })
+    console.log('5', { listOfEachProjectsLanguageCodes })
 
     /*
     5. Get all translations for each language, for each project-variations
   */
-    const termsForEachProjectLanguage = await Promise.all(
-      projects.map((project, projectIndex) =>
-        Promise.all(
-          listOfEachProjectsLanguageCodes[projectIndex].map(languageCode =>
-            getPoeditorProjectLanguageTerms(project.id, languageCode)
+    const termsForEachProjectLanguage =
+      // tslint:disable-next-line
+      !console.log('A) get terms') &&
+      (await Promise.all(
+        // tslint:disable-next-line
+        !console.log('B) first promise', projects) &&
+          projects.map((project, projectIndex) =>
+            Promise.all(
+              listOfEachProjectsLanguageCodes[projectIndex].map(
+                languageCode =>
+                  // tslint:disable-next-line
+                  !console.log('C)', languageCode, project.id) &&
+                  getPoeditorProjectLanguageTerms(project.id, languageCode)
+              )
+            )
           )
-        )
-      )
-    )
+      ))
     // tslint:disable-next-line
-    console.log({ termsForEachProjectLanguage })
+    console.log('6', { termsForEachProjectLanguage })
 
     /*
     6. Merge project defaults with variation (check for empty strings, too)
   */
-    const { translations, missing } = resolveTranslationsGivenTermsAndDefaults(
-      projects,
-      listOfEachProjectsLanguageCodes,
-      termsForEachProjectLanguage
-    )
+    const { translations, missing } =
+      // tslint:disable-next-line
+      !console.log('gonna try translations') &&
+      (await resolveTranslationsGivenTermsAndDefaults(
+        projects,
+        await listOfEachProjectsLanguageCodes,
+        await termsForEachProjectLanguage
+      ))
     // tslint:disable-next-line
-    console.log({ translations, missing })
+    console.log('7', { translations, missing })
 
     /*
     7. Save dat shiiiit to s3.
@@ -185,6 +202,8 @@ export default handler(
     await Promise.all(
       projects.map(
         ({ name: projectName, variation, normative }, projectIndex) =>
+          // tslint:disable-next-line
+          !console.log('7.5 saving', { projectName }) &&
           Promise.all(
             listOfEachProjectsLanguageCodes[projectIndex].map(
               (languageCode, languageIndex) =>
@@ -200,7 +219,7 @@ export default handler(
       )
     )
     // tslint:disable-next-line
-    console.log('map [roject done')
+    console.log('8 map [roject done')
 
     /*
     8. Delete the cheap-lock
@@ -208,7 +227,7 @@ export default handler(
     // tslint:disable-next-line:no-expression-statement
     await s3RemoveObject(lockObjectKey)
     // tslint:disable-next-line
-    console.log('done')
+    console.log('9 done')
 
     /*
     We're done!
