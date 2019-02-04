@@ -16,7 +16,7 @@ export default async function listProjectLanguageTerms(
     language: languageCode,
   })
 
-  const reducedTerms =
+  return (
     response.result &&
     response.result.terms.reduce(
       (
@@ -28,6 +28,5 @@ export default async function listProjectLanguageTerms(
       }),
       {}
     )
-
-  return reducedTerms
+  )
 }
