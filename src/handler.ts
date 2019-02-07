@@ -111,8 +111,13 @@ export default handler(
         and isn't a hack)
     */
     let hasTimedOut = false // tslint:disable-line
+
+    // Lines 117-136 are commented out due to 30 seconds not being enough for updating multiple, large projects.
+    // User will get a time out ClientError, but can't think of a better way to ensure function finishes running...
+
+    /*
     const timeoutInterval: NodeJS.Timer = setInterval(async () => {
-      if (Date.now() - (request.timestamp || 0) >= 25 * 1000) {
+      if (Date.now() - (request.timestamp || 0) >= 60 * 1000) {
         context.callbackWaitsForEmptyEventLoop = false // tslint:disable-line
         hasTimedOut = true // tslint:disable-line
 
@@ -130,6 +135,8 @@ export default handler(
         )
       }
     }, 500)
+
+    */
 
     /*
     4. Get list of translation language codes for each project-variation
@@ -154,7 +161,10 @@ export default handler(
     /*
     6. Merge project defaults with variation (check for empty strings, too)
   */
-    const { translations, missing } = resolveTranslationsGivenTermsAndDefaults(
+    const {
+      translations,
+      missing,
+    } = await resolveTranslationsGivenTermsAndDefaults(
       projects,
       listOfEachProjectsLanguageCodes,
       termsForEachProjectLanguage
@@ -193,7 +203,7 @@ export default handler(
   */
     return (
       !hasTimedOut &&
-      !clearInterval(timeoutInterval) &&
+      // !clearInterval(timeoutInterval) && // see line 115
       response.json({
         message: 'Translation synchronisation completed.',
         missing,

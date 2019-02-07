@@ -31,7 +31,6 @@ provider:
 
 plugins:
   - serverless-webpack
-  - serverless-offline
 
 functions:
   poets:
