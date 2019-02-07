@@ -112,7 +112,7 @@ export default handler(
     */
     let hasTimedOut = false // tslint:disable-line
 
-    // Lines 117-136 are commented out due to 30 seconds not being enough for updating multiple projects.
+    // Lines 117-136 are commented out due to 30 seconds not being enough for updating multiple, large projects.
     // User will get a time out ClientError, but can't think of a better way to ensure function finishes running...
 
     /*
