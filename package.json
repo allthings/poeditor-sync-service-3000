@@ -67,14 +67,15 @@
     "lint-staged": "7.3.0",
     "prettier": "1.16.4",
     "rimraf": "2.6.3",
-    "serverless": "1.36.3",
+    "serverless": "1.37.0",
+    "serverless-offline": "3.33.0",
     "serverless-webpack": "5.2.0",
     "smid": "0.1.1",
     "ts-jest": "23.10.5",
     "ts-loader": "4.5.0",
     "tslint": "5.12.1",
     "typescript": "3.0.3",
-    "webpack": "4.29.1"
+    "webpack": "4.29.3"
   },
   "prettier": {
     "eslintIntegration": false,
