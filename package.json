@@ -52,7 +52,7 @@
     "source-map-support": "0.5.10"
   },
   "devDependencies": {
-    "@allthings/tslint-preset": "1.0.1",
+    "@allthings/tslint-preset": "1.10.1",
     "@types/aws-lambda": "8.10.1",
     "@types/got": "8.3.5",
     "@types/jest": "23.3.14",

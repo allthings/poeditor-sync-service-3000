@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@allthings/tslint-preset@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@allthings/tslint-preset/-/tslint-preset-1.0.1.tgz#9ad3296efe663d215f01fd9f98cfb321f5e4dee0"
-  integrity sha512-JWkajhAq0H3/Miee3LcGcjc94amxIu3lQsgeLn6OctFFrmYz5XqXQGL7CTqpywS7KXUsE7K8AjYCIBUeLD2mUg==
+"@allthings/tslint-preset@1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@allthings/tslint-preset/-/tslint-preset-1.10.1.tgz#158cc71f85999cdb36fcdcd4fc4fde38970b6107"
+  integrity sha512-ARSzeR1xSMYle94wETLvYhVgMd622EUNe3hEcRgH26UoxGgsiaxF4JHFK9nKPOugHqeWn9MY8icXSEzxM7s3TQ==
   dependencies:
-    tslint-config-prettier "1.7.0"
-    tslint-immutable "4.5.1"
-    tslint-react "3.4.0"
+    tslint-config-prettier "1.14.0"
+    tslint-immutable "4.6.0"
+    tslint-react "3.6.0"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0"
@@ -7012,20 +7012,20 @@ tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
-tslint-config-prettier@1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.7.0.tgz#1588f794c6863ba31420e8b1d14ae91326063815"
-  integrity sha512-h8fP8VfFoMOkA/fbPQP5pd4VZfD+LvjkEx48OEWmtObQw8Umj14Ja6NxR4unawE0mq5UbaRPWvn/CcnBg74F5w==
+tslint-config-prettier@1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.14.0.tgz#860b36634e53f4c70c64c51ff3ef7fd9bbab7676"
+  integrity sha512-SomD+aLvAwoihMtyCfkhhWKt9wcpSY2ZpgDV6OuxLYi8+7uOwE2g03aa+jJLSmY0Ys8s3ZLM5Iwfuwu3giCSQQ==
 
-tslint-immutable@4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/tslint-immutable/-/tslint-immutable-4.5.1.tgz#85cf4366ae60acb341ebdd3e1ea8b670d6cf2a11"
-  integrity sha512-rDVZEylmKjuqKlIqsOq7M7wjSMHs/tKP84FisOLhCQVrY80/eviJSn+NPkhdU/mr5YrfqhwiAR72eWhDp5Z/QQ==
+tslint-immutable@4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/tslint-immutable/-/tslint-immutable-4.6.0.tgz#b93f50961c499e331d919084140f5034b84e80af"
+  integrity sha512-GsI40d58M/P/Zo/qI5dn2VH2tn+Xyj0lNz4+lEOo6ekRda0iMyk6VqbZWd/DSmD+CM1TT9i+d2C1ls64eaz9HQ==
 
-tslint-react@3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/tslint-react/-/tslint-react-3.4.0.tgz#12ed3fc7063f3df988370206736b50acbce07e59"
-  integrity sha512-zs4UgLmKfKuXuUh976QBV1zyZ/41gcKfww4IHXrgDpNkvFKl9AiDvYH6CgcqT8yH1DKqfv8KHlHqa0hStEoMxA==
+tslint-react@3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/tslint-react/-/tslint-react-3.6.0.tgz#7f462c95c4a0afaae82507f06517ff02942196a1"
+  integrity sha512-AIv1QcsSnj7e9pFir6cJ6vIncTqxfqeFF3Lzh8SuuBljueYzEAtByuB6zMaD27BL0xhMEqsZ9s5eHuCONydjBw==
   dependencies:
     tsutils "^2.13.1"
 
