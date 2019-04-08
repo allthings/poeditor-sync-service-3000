@@ -58,7 +58,7 @@
     "@types/jest": "23.3.14",
     "@types/node": "9.6.42",
     "@types/source-map-support": "0.4.1",
-    "aws-sdk-mock": "4.3.0",
+    "aws-sdk-mock": "4.4.0",
     "fork-ts-checker-webpack-plugin": "0.5.2",
     "happypack": "5.0.1",
     "husky": "0.14.3",

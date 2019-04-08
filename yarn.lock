@@ -155,7 +155,14 @@
   dependencies:
     symbol-observable "^1.2.0"
 
-"@sinonjs/commons@^1.0.2", "@sinonjs/commons@^1.2.0":
+"@sinonjs/commons@^1", "@sinonjs/commons@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.4.0.tgz#7b3ec2d96af481d7a0321252e7b1c94724ec5a78"
+  integrity sha512-9jHK3YF/8HtJ9wCAbG+j8cD0i0+ATS9A7gXFqS36TblLPNy6rEEc+SB0imo91eCboGaBYGV/MT1/br/J+EE7Tw==
+  dependencies:
+    type-detect "4.0.8"
+
+"@sinonjs/commons@^1.0.2":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.3.0.tgz#50a2754016b6f30a994ceda6d9a0a8c36adda849"
   integrity sha512-j4ZwhaHmwsCb4DlDOIWnI5YyKDNMoNThsmwEpfHx6a1EpsGZ9qYLxP++LMlmBRjtGptGHFsGItJ768snllFWpA==
@@ -169,7 +176,15 @@
   dependencies:
     "@sinonjs/samsam" "^2 || ^3"
 
-"@sinonjs/samsam@^2 || ^3", "@sinonjs/samsam@^3.0.2":
+"@sinonjs/formatio@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@sinonjs/formatio/-/formatio-3.2.1.tgz#52310f2f9bcbc67bdac18c94ad4901b95fde267e"
+  integrity sha512-tsHvOB24rvyvV2+zKMmPkZ7dXX6LSLKZ7aOtXY6Edklp0uRcgGpOsQTTGTcWViFyx4uhWc6GV8QdnALbIbIdeQ==
+  dependencies:
+    "@sinonjs/commons" "^1"
+    "@sinonjs/samsam" "^3.1.0"
+
+"@sinonjs/samsam@^2 || ^3":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-3.0.2.tgz#304fb33bd5585a0b2df8a4c801fcb47fa84d8e43"
   integrity sha512-m08g4CS3J6lwRQk1pj1EO+KEVWbrbXsmi9Pw0ySmrIbcVxVaedoFgLvFsV8wHLwh01EpROVz3KvVcD1Jmks9FQ==
@@ -177,6 +192,20 @@
     "@sinonjs/commons" "^1.0.2"
     array-from "^2.1.1"
     lodash.get "^4.4.2"
+
+"@sinonjs/samsam@^3.1.0", "@sinonjs/samsam@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-3.3.1.tgz#e88c53fbd9d91ad9f0f2b0140c16c7c107fe0d07"
+  integrity sha512-wRSfmyd81swH0hA1bxJZJ57xr22kC07a1N4zuIL47yTS04bDk6AoCkczcqHEjcRPmJ+FruGJ9WBQiJwMtIElFw==
+  dependencies:
+    "@sinonjs/commons" "^1.0.2"
+    array-from "^2.1.1"
+    lodash "^4.17.11"
+
+"@sinonjs/text-encoding@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
+  integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
 "@szmarczak/http-timer@^1.1.0":
   version "1.1.1"
@@ -745,13 +774,13 @@ aws-kms-thingy@2.0.0:
   resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-2.0.0.tgz#508750a40113b8e4185629c84801c994d5f71eed"
   integrity sha512-CDPO49eLWdxd6SSM1WfprPTuWsAx2Zk/b/gF6AhWAEF4pt53OPNLo7Ua6NfOVfhcZJzxFhm0ny7tFDBl7ekGsg==
 
-aws-sdk-mock@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk-mock/-/aws-sdk-mock-4.3.0.tgz#f5f6c51f7e96ae05a8923601422471bef50f2458"
-  integrity sha512-YzLDUv4KnCiCFtuLN6lyir9Xoqticg7nJCyW8krqob6UO2xLWZWE0gkEhoVZyOZSB+g0YIGSeDKmBLJTAYOblw==
+aws-sdk-mock@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk-mock/-/aws-sdk-mock-4.4.0.tgz#90f27b6a4e19293e9ad8c25add8e7137c2db94ce"
+  integrity sha512-cnR2Sff2jSO2UazeGL3rp4ulg66I8mVeCWvKZk0Bb+s//b5sUDZ1OhvOqr7v6uRJKhgaikeZJdZtI6efHYsN2Q==
   dependencies:
-    aws-sdk "^2.369.0"
-    sinon "^7.1.1"
+    aws-sdk "^2.431.0"
+    sinon "^7.3.1"
     traverse "^0.6.6"
 
 aws-sdk@2.324.0:
@@ -769,7 +798,7 @@ aws-sdk@2.324.0:
     uuid "3.1.0"
     xml2js "0.4.19"
 
-aws-sdk@^2.369.0, aws-sdk@^2.373.0:
+aws-sdk@^2.373.0:
   version "2.379.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.379.0.tgz#5701f6b328c7dfddbb56d51543b0ac1418540271"
   integrity sha512-8/nm6b3mTUCd6Tm5Y2mHxEOG2hiu73u9LIEaRjomoJl7wauTuSX0hFrtop5O2nViq9HbSLY9WtqqD/lVHFFSsg==
@@ -782,6 +811,21 @@ aws-sdk@^2.369.0, aws-sdk@^2.373.0:
     sax "1.2.1"
     url "0.10.3"
     uuid "3.1.0"
+    xml2js "0.4.19"
+
+aws-sdk@^2.431.0:
+  version "2.437.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.437.0.tgz#94e41a2ff112aa020ddbe4950dd5f73187889b8b"
+  integrity sha512-sDZb5QBOO6FOMvuKDEdO16YQRk0WUhnQd38EaSt0yUCi4Gev8uypODyYONgODZcXe8Cr1GMwC8scUKr00S/I5w==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
     xml2js "0.4.19"
 
 aws-sign2@~0.7.0:
@@ -4553,7 +4597,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.8.0:
+lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.8.0:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -4586,10 +4630,10 @@ lolex@^2.3.2:
   resolved "https://registry.yarnpkg.com/lolex/-/lolex-2.7.5.tgz#113001d56bfc7e02d56e36291cc5c413d1aa0733"
   integrity sha512-l9x0+1offnKKIzYVjyXU2SiwhXDLekRzKyhnbyldPHvC7BvLPVpdNUNR2KeMAiCN2D/kLNttZgQD5WjSxuBx3Q==
 
-lolex@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/lolex/-/lolex-3.0.0.tgz#f04ee1a8aa13f60f1abd7b0e8f4213ec72ec193e"
-  integrity sha512-hcnW80h3j2lbUfFdMArd5UPA/vxZJ+G8vobd+wg3nVEQA0EigStbYcrG030FJxL6xiDDPEkoMatV9xIh5OecQQ==
+lolex@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lolex/-/lolex-3.1.0.tgz#1a7feb2fefd75b3e3a7f79f0e110d9476e294434"
+  integrity sha512-zFo5MgCJ0rZ7gQg69S4pqBsLURbFw11X68C18OcJjJQbqaXm2NoTrGl1IMM3TIz0/BnN1tIs2tzmmqvCsOMMjw==
 
 loose-envify@^1.0.0:
   version "1.4.0"
@@ -4943,16 +4987,16 @@ nigel@2.x.x:
     hoek "4.x.x"
     vise "2.x.x"
 
-nise@^1.4.7:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/nise/-/nise-1.4.8.tgz#ce91c31e86cf9b2c4cac49d7fcd7f56779bfd6b0"
-  integrity sha512-kGASVhuL4tlAV0tvA34yJYZIVihrUt/5bDwpp4tTluigxUr2bBlJeDXmivb6NuEdFkqvdv/Ybb9dm16PSKUhtw==
+nise@^1.4.10:
+  version "1.4.10"
+  resolved "https://registry.yarnpkg.com/nise/-/nise-1.4.10.tgz#ae46a09a26436fae91a38a60919356ae6db143b6"
+  integrity sha512-sa0RRbj53dovjc7wombHmVli9ZihXbXCQ2uH3TNm03DyvOSIQbxg+pbqDKrk2oxMK1rtLGVlKxcB9rrc6X5YjA==
   dependencies:
     "@sinonjs/formatio" "^3.1.0"
+    "@sinonjs/text-encoding" "^0.7.1"
     just-extend "^4.0.2"
     lolex "^2.3.2"
     path-to-regexp "^1.7.0"
-    text-encoding "^0.6.4"
 
 node-fetch@^1.6.0:
   version "1.7.3"
@@ -6287,17 +6331,17 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-sinon@^7.1.1:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/sinon/-/sinon-7.2.2.tgz#388ecabd42fa93c592bfc71d35a70894d5a0ca07"
-  integrity sha512-WLagdMHiEsrRmee3jr6IIDntOF4kbI6N2pfbi8wkv50qaUQcBglkzkjtoOEbeJ2vf1EsrHhLI+5Ny8//WHdMoA==
+sinon@^7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-7.3.1.tgz#e8276522104e6c08d1cb52a907270b0e316655c4"
+  integrity sha512-eQKMaeWovtOtYe2xThEvaHmmxf870Di+bim10c3ZPrL5bZhLGtu8cz+rOBTFz0CwBV4Q/7dYwZiqZbGVLZ+vjQ==
   dependencies:
-    "@sinonjs/commons" "^1.2.0"
-    "@sinonjs/formatio" "^3.1.0"
-    "@sinonjs/samsam" "^3.0.2"
+    "@sinonjs/commons" "^1.4.0"
+    "@sinonjs/formatio" "^3.2.1"
+    "@sinonjs/samsam" "^3.3.1"
     diff "^3.5.0"
-    lolex "^3.0.0"
-    nise "^1.4.7"
+    lolex "^3.1.0"
+    nise "^1.4.10"
     supports-color "^5.5.0"
 
 sisteransi@^0.1.1:
@@ -6813,11 +6857,6 @@ test-exclude@^4.2.1:
     read-pkg-up "^1.0.1"
     require-main-filename "^1.0.1"
 
-text-encoding@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.6.4.tgz#e399a982257a276dae428bb92845cb71bdc26d19"
-  integrity sha1-45mpgiV6J22uQou5KEXLcb3CbRk=
-
 throat@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
@@ -7280,15 +7319,15 @@ uuid@3.1.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
   integrity sha512-DIWtzUkw04M4k3bf1IcpS2tngXEL26YUD2M0tMDUpnUrz2hgzUBlD55a4FjdLGPvfHxS6uluGWvaVEqgBcVa+g==
 
+uuid@3.3.2, uuid@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+  integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+
 uuid@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
   integrity sha1-Z+LoY3lyFVMN/zGOW/nc6/1Hsho=
-
-uuid@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
-  integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
 v8flags@^3.0.0:
   version "3.1.2"
