@@ -1,17 +1,17 @@
-import { InterfaceProject } from './poeditor/projects'
+import { IInterfaceProject } from './poeditor/projects'
 
 const SOURCE_LANGUAGE = process.env.SOURCE_LANGUAGE || 'en'
 
-export interface InterfaceResolvedTranslations {
+export interface IInterfaceResolvedTranslations {
   readonly translations: ReadonlyArray<any>
   readonly missing: ReadonlyArray<any>
 }
 
 export default function resolveTranslationsGivenTermsAndDefaults(
-  projects: ReadonlyArray<InterfaceProject>,
+  projects: ReadonlyArray<IInterfaceProject>,
   languageCodes: ReadonlyArray<ReadonlyArray<string>>,
   terms: ReadonlyArray<ReadonlyArray<any>>
-): InterfaceResolvedTranslations {
+): IInterfaceResolvedTranslations {
   // 1. find default projects
 
   const defaultProjectIndexes: {

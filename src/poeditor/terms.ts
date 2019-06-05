@@ -1,6 +1,6 @@
 import api from './api'
 
-interface InterfacePoeditorTerm {
+interface IInterfacePoeditorTerm {
   readonly term: string
   readonly reference: string
   readonly translation: { readonly content: string }
@@ -21,7 +21,7 @@ export default async function listProjectLanguageTerms(
     response.result.terms.reduce(
       (
         terms: any,
-        { reference, term, translation: { content } }: InterfacePoeditorTerm
+        { reference, term, translation: { content } }: IInterfacePoeditorTerm
       ) => ({
         ...terms,
         [term]: { content, reference },

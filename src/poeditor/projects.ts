@@ -1,6 +1,6 @@
 import api from './api'
 
-export interface InterfaceProject {
+export interface IInterfaceProject {
   readonly id: number
   readonly isDefault: boolean
   readonly name: string
@@ -8,7 +8,7 @@ export interface InterfaceProject {
   readonly normative: string | undefined
 }
 
-export interface InterfaceProjectFilter {
+export interface IInterfaceProjectFilter {
   readonly name?: string
   readonly variation?: string
   readonly normative?: string
@@ -47,8 +47,8 @@ export function getProjectNameAndVariation(
 
 // Wrapper for https://poeditor.com/docs/api#projects_list
 export default async function listProjects(
-  filters?: InterfaceProjectFilter
-): Promise<ReadonlyArray<InterfaceProject>> {
+  filters?: IInterfaceProjectFilter
+): Promise<ReadonlyArray<IInterfaceProject>> {
   const response = await api('projects/list')
 
   const projects =
@@ -59,9 +59,9 @@ export default async function listProjects(
     }))
 
   if (filters) {
-    return projects.filter((project: InterfaceProject) =>
+    return projects.filter((project: IInterfaceProject) =>
       Object.keys(filters).reduce(
-        (include: boolean, filter: keyof InterfaceProjectFilter) =>
+        (include: boolean, filter: keyof IInterfaceProjectFilter) =>
           include && filters[filter] === project[filter],
         true
       )
