@@ -1,5 +1,4 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const HappyPack = require('happypack')
 const slsw = require('serverless-webpack')
 const webpack = require('webpack')
 
@@ -11,8 +10,15 @@ module.exports = {
     rules: [
       {
         exclude: /node_modules/,
-        loader: 'happypack/loader?id=ts',
         test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
       },
     ],
   },
@@ -28,21 +34,7 @@ module.exports = {
     path: `${__dirname}/.webpack`,
   },
   plugins: [
-    new HappyPack({
-      id: 'ts',
-      loaders: [
-        {
-          path: 'ts-loader',
-          query: {
-            happyPackMode: true,
-            transpileOnly: true,
-          },
-        },
-      ],
-      threads: 4,
-    }),
     new ForkTsCheckerWebpackPlugin({
-      checkSyntacticErrors: true,
       memoryLimit: 4096,
       workers: 1,
     }),
