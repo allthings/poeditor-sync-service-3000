@@ -13,12 +13,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run: npm install
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install --frozen-lockfile
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules
+            - ~/.cache/yarn
 
   # This job runs security check
   security-check:
@@ -27,7 +27,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Security check
           command: yarn security-check
@@ -39,10 +39,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Lint
-          command: npm run lint
+          command: yarn lin
 
   # runs the unit tests
   unit-test:
@@ -51,8 +51,8 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run: 
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
           name: Unit tests
           command: npm run test
 
