@@ -42,7 +42,7 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Lint
-          command: yarn lin
+          command: yarn lint
 
   # runs the unit tests
   unit-test:
