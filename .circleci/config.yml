@@ -54,7 +54,7 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Unit tests
-          command: npm run test
+          command: yarn test
 
 #
 # Workflows
