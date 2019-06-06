@@ -9,12 +9,12 @@ jobs:
   # This job builds the base project directory (e.g. ~/package.json)
   build:
     docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
+      - image: circleci/node:12.4.0-stretch
     steps:
       - checkout
       - restore_cache:
           key: yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile && ls -al
       - save_cache:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
@@ -23,7 +23,7 @@ jobs:
   # This job runs security check
   security-check:
     docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
+      - image: circleci/node:12.4.0-stretch
     steps:
       - checkout
       - restore_cache:
@@ -35,7 +35,7 @@ jobs:
   # This job runs the lint tool on the whole repository
   lint:
     docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
+      - image: circleci/node:12.4.0-stretch
     steps:
       - checkout
       - restore_cache:
@@ -47,7 +47,7 @@ jobs:
   # runs the unit tests
   unit-test:
     docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
+      - image: circleci/node:12.4.0-stretch
     steps:
       - checkout
       - restore_cache:
