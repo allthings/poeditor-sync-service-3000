@@ -1,12 +1,6 @@
 version: 2
-
-#
-# Jobs
-#
-
 jobs:
-
-  # This job builds the base project directory (e.g. ~/package.json)
+  # Build the base project directory (e.g. ~/package.json).
   build:
     docker:
       - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
@@ -19,60 +13,16 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-
-  # This job runs security check
-  security-check:
-    docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
-    steps:
-      - checkout
-      - restore_cache:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+      # Run security check.
       - run:
           name: Security check
           command: yarn security-check
-
-  # This job runs the lint tool on the whole repository
-  lint:
-    docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
-    steps:
-      - checkout
-      - restore_cache:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+      # Run the lint tool on the whole repository.
       - run:
           name: Lint
-          command: ls -al && yarn lint
-
-  # runs the unit tests
-  unit-test:
-    docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
-    steps:
-      - checkout
-      - restore_cache:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          command: yarn lint
+      # Run the unit tests.
       - run:
           name: Unit tests
           command: yarn test
 
-#
-# Workflows
-#
-
-workflows:
-  version: 2
-
-  build_lint_test:
-    jobs:
-      - build
-
-      - security-check:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
-      - unit-test:
-          requires:
-            - build
