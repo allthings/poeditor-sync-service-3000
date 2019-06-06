@@ -10,6 +10,5 @@ const responseMap: { readonly [key: string]: any } = {
   }),
 }
 // tslint:disable-next-line:no-expression-statement no-object-mutation
-module.exports = async (url: string, request: any) => {
-  return (responseMap[url] && responseMap[url](request)) || { body: {} }
-}
+module.exports = async (url: string, request: any) =>
+  (responseMap[url] && responseMap[url](request)) || { body: {} }

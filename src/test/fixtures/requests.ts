@@ -1,4 +1,4 @@
-export interface InterfaceRequest extends AWSLambda.APIGatewayEvent {
+export interface IInterfaceRequest extends AWSLambda.APIGatewayEvent {
   readonly body: any
   readonly cookies?: object
   readonly headers: any // lazy
@@ -31,6 +31,7 @@ export const mockRequestContext: AWSLambda.APIGatewayEventRequestContext = {
     accessKey: null,
     accountId: null,
     apiKey: null,
+    apiKeyId: null,
     caller: null,
     cognitoAuthenticationProvider: null,
     cognitoAuthenticationType: null,
@@ -41,6 +42,7 @@ export const mockRequestContext: AWSLambda.APIGatewayEventRequestContext = {
     userAgent: 'foobar',
     userArn: null,
   },
+  path: '/',
   requestId: 'foobar',
   requestTimeEpoch: 1,
   resourceId: 'foobar',
@@ -48,12 +50,14 @@ export const mockRequestContext: AWSLambda.APIGatewayEventRequestContext = {
   stage: 'foobar',
 }
 
-export const get: InterfaceRequest = {
+export const get: IInterfaceRequest = {
   body: 'foobar',
   context: mockContext,
   headers: {},
   httpMethod: 'GET',
   isBase64Encoded: false,
+  multiValueHeaders: {},
+  multiValueQueryStringParameters: {},
   path: '/',
   pathParameters: {},
   queryStringParameters: {},
