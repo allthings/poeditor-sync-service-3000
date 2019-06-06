@@ -3,7 +3,7 @@ jobs:
   # Build the base project directory (e.g. ~/package.json).
   build:
     docker:
-      - image: circleci/node:8@sha256:3df13c3001ba056f2cc344f6d8fa773970104dc3b3f7a71e97c079c1c137af09
+      - image: circleci/node:8@sha256:3c752f4fbf33c8e9f5b063ed61e3483b2fdd6fdaa48af86fbf7fa1add86d0aa9
     steps:
       - checkout
       - restore_cache:
