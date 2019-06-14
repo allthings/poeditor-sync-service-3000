@@ -807,10 +807,10 @@ ajv@^6.1.0, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-alagarr@1.0.0-30:
-  version "1.0.0-30"
-  resolved "https://registry.yarnpkg.com/alagarr/-/alagarr-1.0.0-30.tgz#c1a4a7b42f7df5fbc8969b3e353784a645bc2ef9"
-  integrity sha512-3XVXwoC5VIJxED5wMbAZ74XgCGu7Ax9VDZm6yVKa7Z0pJHOTPUj21X4QqTqLYg34HY7HwkzQH4RLyiDToCq/3w==
+alagarr@1.0.0-32:
+  version "1.0.0-32"
+  resolved "https://registry.yarnpkg.com/alagarr/-/alagarr-1.0.0-32.tgz#5d799d5d69a38c74498500db9605f0559498e915"
+  integrity sha512-zZL+m9/loV7ZhMc+6fclJhwf8S+G2CGZfr/DvlmrjZjMfhdMTomhz3obJ0F5UDY566Y21XEGZ23H0HUxIfJrQQ==
 
 ammo@2.x.x:
   version "2.0.4"
