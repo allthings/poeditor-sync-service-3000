@@ -1089,13 +1089,13 @@ aws-kms-thingy@2.0.0:
   resolved "https://registry.yarnpkg.com/aws-kms-thingy/-/aws-kms-thingy-2.0.0.tgz#508750a40113b8e4185629c84801c994d5f71eed"
   integrity sha512-CDPO49eLWdxd6SSM1WfprPTuWsAx2Zk/b/gF6AhWAEF4pt53OPNLo7Ua6NfOVfhcZJzxFhm0ny7tFDBl7ekGsg==
 
-aws-sdk-mock@4.4.0:
-  version "4.4.0"
-  resolved "https://registry.npmjs.org/aws-sdk-mock/-/aws-sdk-mock-4.4.0.tgz#90f27b6a4e19293e9ad8c25add8e7137c2db94ce"
-  integrity sha512-cnR2Sff2jSO2UazeGL3rp4ulg66I8mVeCWvKZk0Bb+s//b5sUDZ1OhvOqr7v6uRJKhgaikeZJdZtI6efHYsN2Q==
+aws-sdk-mock@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk-mock/-/aws-sdk-mock-4.5.0.tgz#9de5feefaf9c755f22fcf029db3f202599a9219e"
+  integrity sha512-PAZKbQsdaVVoMr1JZbi04FUrkxCK16qnwBWLm4keeBrEfqYab/cFNsn5IVp/ThdMQpJGYHnmqUPyFq1plKaHZg==
   dependencies:
-    aws-sdk "^2.431.0"
-    sinon "^7.3.1"
+    aws-sdk "^2.483.0"
+    sinon "^7.3.2"
     traverse "^0.6.6"
 
 aws-sdk@2.324.0:
@@ -1113,7 +1113,7 @@ aws-sdk@2.324.0:
     uuid "3.1.0"
     xml2js "0.4.19"
 
-aws-sdk@^2.304.0, aws-sdk@^2.431.0:
+aws-sdk@^2.304.0:
   version "2.468.0"
   resolved "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.468.0.tgz#ce6ce1143eaa1630037afc862abcae62d16be02f"
   integrity sha512-Bo4j1DLDBWSLgNsfpLNU2RKU2+24JzdFqgyyOKOyJ1p6RgrnDxcwoR2CPWK5olPU2cgXmIicetfOGDsC3LjLtg==
@@ -1132,6 +1132,21 @@ aws-sdk@^2.482.0:
   version "2.482.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.482.0.tgz#cd0babcb52f6633885d3500ff38706b8909ccfb8"
   integrity sha512-4MYfQZ+SETyjOUFZLEWVEhBqmxFi6MeI0X8FfAFhczb680+8PCKx/pWZHKLAR41k8+Lg5egM+fId0xtCaCSaeQ==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.483.0:
+  version "2.483.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.483.0.tgz#345fb3d9310f373efaba64c37d5151bf59599dea"
+  integrity sha512-tMyteyFYgyDHecXpGod2DVXlrE+91w+PGfVVF8hmL3eS3ICia8SJooLySW2dXIRpgk6Nfx5/YCGOR/tGIFb2mA==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -6917,9 +6932,9 @@ simple-git@^1.85.0:
   dependencies:
     debug "^4.0.1"
 
-sinon@^7.3.1:
+sinon@^7.3.2:
   version "7.3.2"
-  resolved "https://registry.npmjs.org/sinon/-/sinon-7.3.2.tgz#82dba3a6d85f6d2181e1eca2c10d8657c2161f28"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-7.3.2.tgz#82dba3a6d85f6d2181e1eca2c10d8657c2161f28"
   integrity sha512-thErC1z64BeyGiPvF8aoSg0LEnptSaWE7YhdWWbWXgelOyThent7uKOnnEh9zBxDbKixtr5dEko+ws1sZMuFMA==
   dependencies:
     "@sinonjs/commons" "^1.4.0"
