@@ -65,7 +65,7 @@
     "json-loader": "0.5.7",
     "lint-staged": "8.2.1",
     "prettier": "1.18.2",
-    "rimraf": "2.6.3",
+    "rimraf": "2.7.1",
     "serverless": "1.47.0",
     "serverless-offline": "4.10.6",
     "serverless-webpack": "5.3.1",
