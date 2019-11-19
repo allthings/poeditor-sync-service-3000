@@ -487,6 +487,13 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/continuation-local-storage@*":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@types/continuation-local-storage/-/continuation-local-storage-3.2.2.tgz#7cbf177a6206ece87bc4b808784772ad2aa5f6db"
+  integrity sha512-aItm+aYPJ4rT1cHmAxO+OdWjSviQ9iB5UKb5f0Uvgln0N4hS2mcDodHtPiqicYBXViUYhqyBjhA5uyOcT+S34Q==
+  dependencies:
+    "@types/node" "*"
+
 "@types/got@9.6.0":
   version "9.6.0"
   resolved "https://registry.yarnpkg.com/@types/got/-/got-9.6.0.tgz#bba73ff0a46b2691ddb3d86e89f8b2f43ebb829d"
@@ -1166,16 +1173,16 @@ aws-sign2@~0.7.0:
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
   integrity sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=
 
-aws-xray-sdk-core@2.3.3:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/aws-xray-sdk-core/-/aws-xray-sdk-core-2.3.3.tgz#fa8e103ff25526da6d66e5f942947a06fba069a4"
-  integrity sha512-4zcItAzHRr7QJ15y168tMTdwoa87YoiyHntPYmnIMoiPYT8kphZ++pN182+rCi+NBS1ySk5qG3vVJfJUjvL7OA==
+aws-xray-sdk-core@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/aws-xray-sdk-core/-/aws-xray-sdk-core-2.5.0.tgz#4e6f12627ddfac1c8fd73d915771cb7669977c38"
+  integrity sha512-qe60bv0kn5KY6gAIF88TPCOIdu/A3dTmcKISj+kE4OH02eF6kMm1ctL7OgoBAasnsDNSn0VMLhIaA1izgoWuxA==
   dependencies:
+    "@types/continuation-local-storage" "*"
     atomic-batcher "^1.0.2"
     aws-sdk "^2.304.0"
     continuation-local-storage "^3.2.0"
     date-fns "^1.29.0"
-    lodash "^4.17.11"
     pkginfo "^0.4.0"
     semver "^5.3.0"
     winston "^2.4.4"
