@@ -64,7 +64,7 @@
     "jest": "24.8.0",
     "json-loader": "0.5.7",
     "lint-staged": "8.2.1",
-    "prettier": "1.18.2",
+    "prettier": "1.19.1",
     "rimraf": "2.6.3",
     "serverless": "1.47.0",
     "serverless-offline": "4.10.6",
